@@ -16,6 +16,8 @@ Write tests for each feature
 
 Install package.json, sinon, mocha, superTest --done--
 
+Install eslint --done--
+
 **** HomePage ****
 
 * On first page there will be list of todo.

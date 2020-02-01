@@ -1,0 +1,30 @@
+Create directory structure as required
+  * lib
+    - app.js
+    - handlers
+  * public
+  * css
+        -style.css
+    - index.html
+    * scripts
+  * template
+  * test
+    - handlersTest.js
+  - server.js
+
+Write tests for each feature 
+
+Install package.json, sinon, mocha, superTest
+
+**** HomePage ****
+
+* On first page there will be list of todo.
+* Also on first page there will be one button that will allow you to add new todo.
+* After adding the new todo the HomePage should get updated.
+* There will be one checkbox before title of the todo if user clicks it that task will be removed.   
+
+**** Add todo page ****
+
+* When we click on the button from homepage to add a todo it will open a new page and will take the information of todo.
+* This page will take the title and date time when the task needs to be done. 
+* When we will click on ok button it will again redirect to the homepage and wil show the updated list of todo.

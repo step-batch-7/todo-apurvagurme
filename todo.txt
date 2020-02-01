@@ -14,7 +14,7 @@ Create directory structure as follows --done--
 
 Write tests for each feature 
 
-Install package.json, sinon, mocha, superTest
+Install package.json, sinon, mocha, superTest --done--
 
 **** HomePage ****
 

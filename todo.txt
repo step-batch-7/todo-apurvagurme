@@ -1,12 +1,12 @@
-Create directory structure as required
+Create directory structure as follows --done--
   * lib
     - app.js
     - handlers
   * public
-  * css
+    * css
         -style.css
-    - index.html
     * scripts
+    - index.html
   * template
   * test
     - handlersTest.js

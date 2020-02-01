@@ -12,11 +12,11 @@ Create directory structure as follows --done--
     - handlersTest.js
   - server.js
 
-Write tests for each feature 
-
 Install package.json, sinon, mocha, superTest --done--
 
 Install eslint --done--
+
+Write tests for handlers 
 
 **** HomePage ****
 
@@ -30,3 +30,10 @@ Install eslint --done--
 * When we click on the button from homepage to add a todo it will open a new page and will take the information of todo.
 * This page will take the title and date time when the task needs to be done. 
 * When we will click on ok button it will again redirect to the homepage and wil show the updated list of todo.
+
+* DATA STRUCTURE
+
+[ 
+  {id: 1, title: birthday, tasks: [ {id: 1, task: Pay electricity bill}, {id: 2, task: Pay mobile balance} ] },
+  {id: 2, title: birthday, tasks: [ {id: 1, task: Pay electricity bill}, {id: 2, task: Pay mobile balance} ] } 
+]

@@ -39,4 +39,4 @@ Write tests for handlers
 ] 
 
 * save data in the database --done--
-* Display the todoList on the homepage 
+* Display the todoList on the homepage --done--

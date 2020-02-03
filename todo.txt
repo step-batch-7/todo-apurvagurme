@@ -34,8 +34,8 @@ Write tests for handlers
 * DATA STRUCTURE
 
 [ 
-  {id: 1, title: 11-2-20, tasks: [ {id: 1, task: Pay electricity bill}, {id: 2, task: Pay mobile balance} ] },
-  {id: 2, title: 20-2-20, tasks: [ {id: 1, task: Pay electricity bill}, {id: 2, task: Pay mobile balance} ] } 
+  {id: 1, title: 11-2-20, subTasks: [ {id: 1, task: Pay electricity bill}, {id: 2, task: Pay mobile balance} ] },
+  {id: 2, title: 20-2-20, subTasks: [ {id: 1, task: Pay electricity bill}, {id: 2, task: Pay mobile balance} ] } 
 ] 
 
 * save data in the database --done--

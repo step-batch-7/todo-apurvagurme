@@ -36,6 +36,7 @@ Install eslint --done--
 ] 
 
 * save data in the database --done--
+
 * Display the todoList on the homepage --done--
 
 * Fix that when only one subTask is given it is showing undefined on the homepage --done--
@@ -46,8 +47,13 @@ Install eslint --done--
 
 * Add a key that will tell whether a task is completed or not --done--
 
+* There will be one checkbox before title of the todo if user clicks it will tell that the task is completed. --done--
+
+* Change the id's
+* Change status to done and giving boolean values would be better
+* Know about XHR
 * Write tests for handlers 
 * Create a button to delete a particular subTask while writing the todo
 * Implement the delete button for deleting a particular todoBlock
 * Implement the delete button for deleting a particular subTask
-* There will be one checkbox before title of the todo if user clicks it will tell that the task is completed.   
+* when the user clicks on the checkbox the value of status inside the database should change to done

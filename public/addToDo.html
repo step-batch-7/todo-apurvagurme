@@ -10,14 +10,18 @@
     <h1>NEW TODO</h1>
     <div id="TopButtons">
       <a href="./index.html"> <img src="./images/back.jpeg"/></a>
-      <img onclick="deleteItem()" src="./images/cross.png" />
-      <img src="./images/tick.png" />
-      <img onclick="addItem()" src="./images/plus.png" />
+      <img onclick="deleteItem()" src="./images/cross.png" width="48" height="48" />
+      <img onclick="addItem()" src="./images/plus.png" width="48" height="48" />
     </div>
-    <br />
-    <div class="title">Task Title: <input type="text" name="firstname" /><br /></div>
-    <div id="taskBar"></div>
-    <br />
-    <div id="subTasks"></div>
+    <form method="POST" action="index.html">
+      <br />
+      <div class="title">Task Title: <input type="text" name="title" /><br /></div>
+      <div id="taskBar"></div>
+      <br />
+      <div id="subTasks"></div>
+      <div id="save">
+        <input type="image" src="./images/tick.png" width="48" height="48" />
+      </div>
+    </form>
   </body>
 </html>

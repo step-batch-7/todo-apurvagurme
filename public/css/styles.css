@@ -1,3 +1,7 @@
+body {
+  background-image: linear-gradient(to right, rgb(242, 242, 242), rgb(255, 255, 255));
+}
+
 #TopButtons {
   display: flex;
   justify-content: center;
@@ -54,4 +58,10 @@ img {
 #addTodo {
   display: flex;
   justify-content: center;
+}
+
+#save {
+  position: fixed;
+  margin-bottom: 0px;
+  right: 0;
 }

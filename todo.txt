@@ -20,16 +20,16 @@ Write tests for handlers
 
 **** HomePage ****
 
-* On first page there will be list of todo.
-* Also on first page there will be one button that will allow you to add new todo.
-* After adding the new todo the HomePage should get updated.
-* There will be one checkbox before title of the todo if user clicks it that task will be removed.   
+* On first page there will be list of todo. --done--
+* Also on first page there will be one button that will allow you to add new todo. --done--
+* After adding the new todo the HomePage should get updated. --done--
+* There will be one checkbox before title of the todo if user clicks it will tell that the task is completed.   
 
 **** Add todo page ****
 
-* When we click on the button from homepage to add a todo it will open a new page and will take the information of todo.
-* This page will take the title and date time when the task needs to be done. 
-* When we will click on ok button it will again redirect to the homepage and wil show the updated list of todo.
+* When we click on the button from homepage to add a todo it will open a new page and will take the information of todo. --done--
+* This page will take the title and the subTasks needed to be done. --done-- 
+* When we will click on ok button it will again redirect to the homepage and wil show the updated list of todo. --done--
 
 * DATA STRUCTURE
 
@@ -40,3 +40,11 @@ Write tests for handlers
 
 * save data in the database --done--
 * Display the todoList on the homepage --done--
+
+* Create a button to delete a particular subTask while writing the todo
+* Server should not crash while only heading of the task is given 
+* Fix that when only one subTask is given it is showing undefined on the homepage
+* Change the display of the divisions in the homepage its coming in one line only
+* Implement the delete button for deleting a particular todoBlock
+* Implement the delete button for deleting a particular subTask
+* Add a key that will tell whether a task is completed or not 

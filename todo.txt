@@ -16,14 +16,11 @@ Install package.json, sinon, mocha, superTest --done--
 
 Install eslint --done--
 
-Write tests for handlers 
-
 **** HomePage ****
 
 * On first page there will be list of todo. --done--
 * Also on first page there will be one button that will allow you to add new todo. --done--
 * After adding the new todo the HomePage should get updated. --done--
-* There will be one checkbox before title of the todo if user clicks it will tell that the task is completed.   
 
 **** Add todo page ****
 
@@ -31,7 +28,7 @@ Write tests for handlers
 * This page will take the title and the subTasks needed to be done. --done-- 
 * When we will click on ok button it will again redirect to the homepage and wil show the updated list of todo. --done--
 
-* DATA STRUCTURE
+* DATA STRUCTURE --done--
 
 [ 
   {id: 1, title: 11-2-20, subTasks: [ {id: 1, task: Pay electricity bill}, {id: 2, task: Pay mobile balance} ] },
@@ -41,10 +38,15 @@ Write tests for handlers
 * save data in the database --done--
 * Display the todoList on the homepage --done--
 
+* Fix that when only one subTask is given it is showing undefined on the homepage --done--
+
+* Server should not crash while only heading of the task is given --done--
+
+* Write tests for handlers 
+
 * Create a button to delete a particular subTask while writing the todo
-* Server should not crash while only heading of the task is given 
-* Fix that when only one subTask is given it is showing undefined on the homepage
 * Change the display of the divisions in the homepage its coming in one line only
 * Implement the delete button for deleting a particular todoBlock
 * Implement the delete button for deleting a particular subTask
 * Add a key that will tell whether a task is completed or not 
+* There will be one checkbox before title of the todo if user clicks it will tell that the task is completed.   

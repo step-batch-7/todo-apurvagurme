@@ -42,10 +42,11 @@ Install eslint --done--
 
 * Server should not crash while only heading of the task is given --done--
 
+* Change the display of the divisions in the homepage its coming in one line only --done--
+
 * Write tests for handlers 
 
 * Create a button to delete a particular subTask while writing the todo
-* Change the display of the divisions in the homepage its coming in one line only
 * Implement the delete button for deleting a particular todoBlock
 * Implement the delete button for deleting a particular subTask
 * Add a key that will tell whether a task is completed or not 

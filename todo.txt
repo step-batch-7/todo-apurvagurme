@@ -49,8 +49,10 @@ Install eslint --done--
 
 * There will be one checkbox before title of the todo if user clicks it will tell that the task is completed. --done--
 
+* Change status to done and giving boolean values would be better --done--
+
 * Change the id's
-* Change status to done and giving boolean values would be better
+
 * Know about XHR
 * Write tests for handlers 
 * Create a button to delete a particular subTask while writing the todo

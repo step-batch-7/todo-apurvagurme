@@ -51,8 +51,9 @@ Install eslint --done--
 
 * Change status to done and giving boolean values would be better --done--
 
-* Change the id's
+* Change the id of todo --done--
 
+* Change the id of subTasks 
 * Know about XHR
 * Write tests for handlers 
 * Create a button to delete a particular subTask while writing the todo

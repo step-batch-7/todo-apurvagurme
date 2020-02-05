@@ -3,9 +3,11 @@
   <head>
     <link rel="styleSheet" href="/css/styles.css" />
     <script src="/scripts/addToDo.js"></script>
+    <script src="/scripts/requests.js"></script>
+    <script src="/scripts/loadHomePage.js"></script>
     <title>TODO APP</title>
   </head>
-  <body>
+  <body onload="load()">
     <h1>TODO LIST</h1>
     <div id="addTodo">
       <a href="/addToDo.html">
@@ -13,8 +15,9 @@
       </a>
     </div>
     <br />
-    <div style="display: flex; flex-wrap: wrap; padding-left: 20px; justify-content: space-evenly;">
-      __TODO'S__
-    </div>
+    <div
+      id="todos"
+      style="display: flex; flex-wrap: wrap; padding-left: 20px; justify-content: space-evenly;"
+    ></div>
   </body>
 </html>

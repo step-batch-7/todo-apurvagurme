@@ -1,19 +1,13 @@
 const getSubTasks = function(tasks) {
-  if (tasks.length === 1) {
+  const subTasks = tasks.map(task => {
+    let status;
+    task.status === true ? (status = 'checked') : (status = '');
     return `
-    <div  style="padding-left: 20px; class="cbDiv"">${tasks[0].subTasks}
-    <input type="checkbox" onclick="onCheck(event)"
-    class="cb" value=${tasks[0].id}>
+    <div style="padding-left: 20px; class="cbDiv">${task.subTask}
+    <input type="checkbox" onclick="onCheck(event)" class="cb" value=${task.id} ${status}>
     </div>
     <br>`;
-  }
-  const subTasks = tasks.map(
-    task => `
-    <div style="padding-left: 20px; class="cbDiv">${task.subTask}
-    <input type="checkbox" onclick="onCheck(event)" class="cb" value=${task.id}>
-    </div>
-    <br>`
-  );
+  });
   return subTasks.join('\n');
 };
 

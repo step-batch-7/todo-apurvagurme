@@ -5,7 +5,7 @@ const getSubTasks = function(tasks) {
     return `
     <div style="padding-left: 20px; class="cbDiv">${task.subTask}
     <input type="checkbox" onclick="onCheck(event)" class="cb" value=${task.id} ${status}>
-    <a href="./index.html"> <img class="remove" src="./images/remove.svg"/></a>
+     <img class="remove" onclick="deleteSubtask(event)" src="./images/remove.svg" id=${task.id} ${status}/>
     </div>
     <br>`;
   });

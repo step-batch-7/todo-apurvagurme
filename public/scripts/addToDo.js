@@ -25,6 +25,14 @@ const onCheck = function(event) {
   xhr.send(clickedCb);
 };
 
+const deleteSubtask = function(event) {
+  const deleted = `id=${event.target.id}`;
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/deleteSubtask', false);
+  xhr.send(deleted);
+  load();
+};
+
 const main = function() {
   addItem();
   addTodo();

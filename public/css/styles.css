@@ -46,6 +46,10 @@ img {
   margin-top: -10px;
 }
 
+.remove {
+  width: 10px;
+}
+
 .title {
   margin-left: 540px;
   padding: 10px;

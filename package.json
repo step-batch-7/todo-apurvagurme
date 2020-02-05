@@ -15,7 +15,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "mocha && nyc mocha",
+    "test": "npx eslint ./public/scripts ./lib ./server.js && mocha && nyc mocha ",
     "start": "node server.js"
   },
   "repository": {

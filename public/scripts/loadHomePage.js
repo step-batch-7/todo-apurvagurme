@@ -18,11 +18,14 @@ const toHTML = function(context, todo) {
     subtasks = getSubTasks(todo.tasks);
   }
   context += `
-    <div id=${todo.id} class='task' style="margin: 10px;">
-    <p class="titleOfTodo">Title: ${todo.title}
+  <div id=${todo.id} class='task' style="margin: 10px;">
+  <div class="titleOfTodo">Title: ${todo.title}
+  <div> 
+    <img class="editTitle" onclick="edit(event)" src="./images/edit.svg" id=${todo.id}>
     <img class="removeTodo" onclick="deleteTodo(event)" src="./images/dustbin.svg" id=${todo.id}>
-    </p>
-    <p>Tasks: ${subtasks}</p>
+    </div>
+    </div>
+    <p>Tasks: <div class='scrollTasks'>${subtasks}</div></p>
     </div>`;
   return context;
 };

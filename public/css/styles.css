@@ -2,11 +2,6 @@ body {
   background-image: linear-gradient(to right, rgb(242, 242, 242), rgb(255, 255, 255));
 }
 
-img:hover {
-  background-color: rgb(193, 191, 191);
-  border-radius: 10px;
-}
-
 #TopButtons {
   display: flex;
   justify-content: center;
@@ -22,8 +17,13 @@ p {
   border-radius: 10px;
   width: 200px;
   height: 230px;
-  padding: 2px;
+  padding: 16px;
   box-shadow: 3px 3px 8px lightgrey;
+}
+
+.scrollTasks {
+  overflow: scroll;
+  height: 170px;
 }
 
 .subTask {
@@ -55,7 +55,7 @@ img {
   justify-content: space-between;
 }
 .removeTodo {
-  width: 40px;
+  width: 30px;
 }
 
 .remove {
@@ -81,4 +81,8 @@ img {
   position: fixed;
   margin-bottom: 0px;
   right: 0;
+}
+
+.editTitle {
+  width: 26px;
 }

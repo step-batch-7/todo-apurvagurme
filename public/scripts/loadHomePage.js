@@ -19,6 +19,7 @@ const toHTML = function(context, todo) {
   }
   context += `
     <div id=${todo.id} class='task' style="margin: 10px;">
+    <img class="remove" onclick="deleteTodo(event)" src="./images/remove.svg" id=${todo.id}>
     <p>Title: ${todo.title}</p>
     <p>Tasks: ${subtasks}</p>
     </div>`;

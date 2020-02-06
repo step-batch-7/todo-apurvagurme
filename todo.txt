@@ -60,9 +60,11 @@ Install eslint --done--
 * Create a button to delete a particular subTask while writing the todo --done--
 
 * Add a deleteSubtask handler --done--
+
 * Implement the delete button for deleting a particular subTask --done--
+
+* Implement the delete button for deleting a particular todoBlock --done--
 
 * Give correct response when the given path is wrong at present it is giving contents for wrong path also
 * Know about XHR 
 * Write tests for handlers 
-* Implement the delete button for deleting a particular todoBlock 

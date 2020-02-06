@@ -33,6 +33,14 @@ const deleteSubtask = function(event) {
   load();
 };
 
+const deleteTodo = function(event) {
+  const deleted = `id=${event.target.id}`;
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/deleteTodo', false);
+  xhr.send(deleted);
+  load();
+};
+
 const main = function() {
   addItem();
   addTodo();

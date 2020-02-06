@@ -2,6 +2,11 @@ body {
   background-image: linear-gradient(to right, rgb(242, 242, 242), rgb(255, 255, 255));
 }
 
+img:hover {
+  background-color: rgb(193, 191, 191);
+  border-radius: 10px;
+}
+
 #TopButtons {
   display: flex;
   justify-content: center;

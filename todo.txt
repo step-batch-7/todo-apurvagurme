@@ -92,6 +92,8 @@ Install eslint --done--
 **** extra ****
 
   * Improve UI
-    * Scroll when the data is exceeding out of the display block.
+    * Scroll when the data is exceeding out of the display block. --done--
+    * Modify homepage --done--
+    * Modify addTodoPage
 
   * Write tests for handlers 

@@ -41,6 +41,19 @@ const deleteTodo = function(event) {
   load();
 };
 
+const edit = function(event) {
+  const [, , header, list] = event.path;
+  const [, title] = header.innerText.split(': ');
+  const id = list.id;
+};
+
+const sendEditReq = function() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/deleteSubtask', false);
+  xhr.send();
+  load();
+};
+
 const main = function() {
   addItem();
   addTodo();

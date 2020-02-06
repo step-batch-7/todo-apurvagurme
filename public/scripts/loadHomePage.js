@@ -3,8 +3,8 @@ const getSubTasks = function(tasks) {
     let status;
     task.status === true ? (status = 'checked') : (status = '');
     return `
-    <div style="padding-left: 20px; class="cbDiv">${task.subTask}
-    <input type="checkbox" onclick="onCheck(event)" class="cb" value=${task.id} ${status}>
+    <div style="padding-left: 20px; class="cbDiv">
+    <input type="checkbox" onclick="onCheck(event)" class="cb" value=${task.id} ${status}>${task.subTask}
      <img class="remove" onclick="deleteSubtask(event)" src="./images/remove.svg" id=${task.id} ${status}/>
     </div>
     <br>`;
@@ -19,8 +19,9 @@ const toHTML = function(context, todo) {
   }
   context += `
     <div id=${todo.id} class='task' style="margin: 10px;">
-    <img class="remove" onclick="deleteTodo(event)" src="./images/remove.svg" id=${todo.id}>
-    <p>Title: ${todo.title}</p>
+    <p class="titleOfTodo">Title: ${todo.title}
+    <img class="removeTodo" onclick="deleteTodo(event)" src="./images/dustbin.svg" id=${todo.id}>
+    </p>
     <p>Tasks: ${subtasks}</p>
     </div>`;
   return context;

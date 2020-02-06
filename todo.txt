@@ -69,6 +69,10 @@ Install eslint --done--
 
 * Change the url index.html while new todo is added --done--
 
+* Improve UI
+  * Scroll when the data is exceeding out of the display block.
+
+* Change the position of delete buttons 
 * Give correct response when the given path is wrong at present it is giving contents for wrong path also
 * Know about XHR 
 * Write tests for handlers 

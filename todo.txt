@@ -65,6 +65,8 @@ Install eslint --done--
 
 * Implement the delete button for deleting a particular todoBlock --done--
 
+* Remove redundancy
+* Change the url index.html while new todo is added
 * Give correct response when the given path is wrong at present it is giving contents for wrong path also
 * Know about XHR 
 * Write tests for handlers 

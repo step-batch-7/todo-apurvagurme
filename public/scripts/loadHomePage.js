@@ -21,7 +21,7 @@ const toHTML = function(taskTemplate, todo) {
   taskTemplate += `
   <div id=${todo.id} class='task' style="margin: 10px;">
   <div class="titleOfTodo">
-  <input class="titleInputBox" type="text" value=${todo.title} >
+  <input class="titleInputBox" type="text" value=${todo.title}>
   <div> 
   <img class="saveButton" onclick="saveReq(event)" src="./images/save.png" id=${todo.id}>
   <img class="editTitle" onclick="edit(event)" src="./images/edit.svg" id=${todo.id}>

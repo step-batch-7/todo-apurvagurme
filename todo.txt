@@ -75,6 +75,8 @@ Install eslint --done--
 
 * Know about XHR --done--
 
+* Configure the data storage --done--
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 **** New Requirements ****
@@ -86,8 +88,10 @@ Install eslint --done--
     * Add save button to save the changed title --done--
 
     * Send a post request for changing the title 
+        * First change the id's of the elements.
 
     * Add the new title to the previous record
+
 
 * Edit tasks: Ability to edit their existing tasks.
 

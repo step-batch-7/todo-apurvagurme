@@ -7,10 +7,6 @@ body {
   margin-top: 2.73%;
 }
 
-checkboxText {
-  /* padding-right: 20px; */
-}
-
 input:hover {
   cursor: pointer;
 }
@@ -28,7 +24,7 @@ input:checked + p {
 .task {
   background-color: #fffffff3;
   border-radius: 6px;
-  width: 200px;
+  width: 220px;
   height: 230px;
   padding: 16px;
   box-shadow: 0px 0px 5px 1px #f0f0f0;
@@ -106,10 +102,26 @@ img {
   right: 0;
 }
 
+.saveButton {
+  width: 25.5px;
+}
+
 .editTitle {
-  width: 26px;
+  width: 21.5px;
 }
 
 .removeTodo {
-  width: 32px;
+  width: 26.5px;
+}
+
+.titleInputBox {
+  height: 30px;
+  width: 120px;
+  border: none;
+  border-color: transparent;
+  font-weight: 1000px;
+}
+
+input[type='text'] {
+  font-size: 20px;
 }

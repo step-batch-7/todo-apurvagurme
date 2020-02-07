@@ -91,9 +91,13 @@ Install eslint --done--
 
 **** extra ****
 
-  * Improve UI
-    * Scroll when the data is exceeding out of the display block. --done--
-    * Modify homepage --done--
-    * Modify addTodoPage
+* Ask for confirmation before deleting
 
-  * Write tests for handlers 
+* Improve UI
+  * Scroll when the data is exceeding out of the display block. --done--
+  * Modify homepage --done--
+  * Change cursor pointer when it is on the image --done--
+  * Modify addTodoPage 
+  * Change the text to when checkbox is checked 
+
+* Write tests for handlers 

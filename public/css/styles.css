@@ -3,13 +3,26 @@ body {
   font-weight: 100;
 }
 
+.cb {
+  margin-top: 2.73%;
+}
+
+checkboxText {
+  /* padding-right: 20px; */
+}
+
+input:hover {
+  cursor: pointer;
+}
+
+input:checked + p {
+  text-decoration-color: lightgray;
+  color: grey;
+}
+
 #TopButtons {
   display: flex;
   justify-content: center;
-}
-
-p {
-  padding-left: 5px;
 }
 
 .task {
@@ -51,15 +64,11 @@ h1 {
   text-align: center;
   color: rgb(138, 138, 138);
   display: block;
-  font-size: 2em;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
   font-weight: bold;
 }
 
 img {
+  cursor: pointer;
   width: 50px;
   margin-top: -10px;
   opacity: 0.7;
@@ -72,8 +81,9 @@ img {
 }
 
 .remove {
+  margin-top: 1.5px;
   margin-left: 12px;
-  width: 10px;
+  width: 12px;
 }
 
 .title {

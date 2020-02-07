@@ -14,17 +14,15 @@ const getSubTasks = function(tasks) {
 };
 
 const toHTML = function(taskTemplate, todo) {
-  let subtasks = 'no subtasks';
+  let subtasks = '';
   if (todo.tasks) {
     subtasks = getSubTasks(todo.tasks);
   }
   taskTemplate += `
   <div id=${todo.id} class='task' style="margin: 10px;">
   <div class="titleOfTodo">
-  <input class="titleInputBox" type="text" value=${todo.title}>
+  <input id=title_${todo.id} class="titleInputBox" type="text" value=${todo.title} onkeydown="saveNewTitle(event)">
   <div> 
-  <img class="saveButton" onclick="saveReq(event)" src="./images/save.png" id=${todo.id}>
-  <img class="editTitle" onclick="edit(event)" src="./images/edit.svg" id=${todo.id}>
   <img class="removeTodo" onclick="deleteTodo(event)" src="./images/dustbin.svg" id=${todo.id}>
   </div>
   </div>

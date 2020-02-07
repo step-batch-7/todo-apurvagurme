@@ -81,17 +81,16 @@ Install eslint --done--
 
 **** New Requirements ****
 
-* Edit title: Ability to edit their existing todo list title.
+* Edit title: Ability to edit their existing todo list title. --done--
     
     * Change the type of title to input type --done--
 
     * Add save button to save the changed title --done--
 
-    * Send a post request for changing the title 
+    * Send a post request for changing the title --done--
         * First change the id's of the elements.
 
-    * Add the new title to the previous record
-
+    * Add the new title to the previous record --done--
 
 * Edit tasks: Ability to edit their existing tasks.
 

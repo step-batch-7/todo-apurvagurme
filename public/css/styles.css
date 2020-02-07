@@ -101,16 +101,8 @@ img {
   right: 0;
 }
 
-.saveButton {
-  width: 25.5px;
-}
-
-.editTitle {
-  width: 21.5px;
-}
-
 .removeTodo {
-  width: 26.5px;
+  width: 40px;
 }
 
 .titleInputBox {

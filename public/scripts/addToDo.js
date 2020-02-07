@@ -9,6 +9,7 @@ const addItem = function() {
   const subTask = document.createElement('textarea');
   subTask.className = 'subTask';
   subTask.name = 'task';
+  subTask.required;
   const subTaskBar = document.getElementById('subTasks');
   subTaskBar.appendChild(subTask);
 };
@@ -45,6 +46,21 @@ const edit = function(event) {
   const [, , header, list] = event.path;
   const [, title] = header.innerText.split(': ');
   const id = list.id;
+};
+
+const saveNewTitle = function(event) {
+  let newTitle;
+  let titleId;
+  if (event.key == 'Enter') {
+    newTitle = `title=${event.target.value}`;
+    titleId = `id=${event.target.id}`;
+  }
+  if (newTitle) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/saveNewTitle', false);
+    xhr.send(`${newTitle}&${titleId}`);
+    load();
+  }
 };
 
 const sendEditReq = function() {

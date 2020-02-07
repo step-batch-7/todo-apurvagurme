@@ -75,15 +75,17 @@ Install eslint --done--
 
 * Know about XHR --done--
 
+------------------------------------------------------------------------------------------------------------------------------
+
 **** New Requirements ****
 
 * Edit title: Ability to edit their existing todo list title.
     
-    * Change the type of title to input type
+    * Change the type of title to input type --done--
 
-    * Add save button to save the changed title
+    * Add save button to save the changed title --done--
 
-    * Send a post request for changing the title
+    * Send a post request for changing the title 
 
     * Add the new title to the previous record
 
@@ -98,6 +100,12 @@ Install eslint --done--
 * Home Page: If not logged in it is a login page else it is the user's todo page/dashboard.
 
 **** extra ****
+
+* Don't submit if the nothing is given 
+
+* Delete button of subtask should only be visible when mouse is on the particular division
+
+* Also change the position of the  delete button of the subtask at the end of line 
 
 * Ask for confirmation before deleting
 

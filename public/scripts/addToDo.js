@@ -63,6 +63,21 @@ const saveNewTitle = function(event) {
   }
 };
 
+const saveSubTask = function(event) {
+  let newTitle;
+  let titleId;
+  if (event.key == 'Enter') {
+    newTitle = `title=${event.target.value}`;
+    titleId = `id=${event.target.id}`;
+  }
+  if (newTitle) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/saveSubTask', false);
+    xhr.send(`${newTitle}&${titleId}`);
+    load();
+  }
+};
+
 const sendEditReq = function() {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/deleteSubtask', false);

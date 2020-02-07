@@ -45,8 +45,10 @@ input:checked + p {
   margin-left: 440px;
   border-radius: 8px;
   padding: 10px;
+  height: 12px;
   width: 380px;
   background-color: rgb(237, 237, 237);
+  font-size: 20px;
 }
 
 .addButton {
@@ -106,7 +108,7 @@ img {
 }
 
 .titleInputBox {
-  height: 30px;
+  height: 20px;
   width: 120px;
   border: none;
   border-color: transparent;

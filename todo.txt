@@ -88,11 +88,10 @@ Install eslint --done--
     * Add save button to save the changed title --done--
 
     * Send a post request for changing the title --done--
-        * First change the id's of the elements.
 
     * Add the new title to the previous record --done--
 
-* Edit tasks: Ability to edit their existing tasks.
+* Edit tasks: Ability to edit their existing tasks. --done--
 
 * Search by title:  Search the list by its title words.
 
@@ -113,6 +112,7 @@ Install eslint --done--
 * Ask for confirmation before deleting
 
 * Improve UI
+  * First change the id's of the elements.
   * Scroll when the data is exceeding out of the display block. --done--
   * Modify homepage --done--
   * Change cursor pointer when it is on the image --done--

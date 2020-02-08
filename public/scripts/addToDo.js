@@ -19,17 +19,6 @@ const deleteItem = function() {
   subtasks.removeChild(subtasks.lastChild);
 };
 
-const sendPostReq = function(url, content, callback) {
-  const xhr = new XMLHttpRequest();
-  xhr.onload = function() {
-    if (this.status === 200) {
-      callback(this.responseText);
-    }
-  };
-  xhr.open('POST', url, false);
-  xhr.send(content);
-};
-
 const onCheck = function(event) {
   const clickedCb = `id=${event.target.value}`;
   const xhr = new XMLHttpRequest();

@@ -103,7 +103,7 @@ Install eslint --done--
 
 **** extra ****
 
-* Don't submit if the nothing is given 
+* Don't submit if nothing is given 
 
 * Delete button of subtask should only be visible when mouse is on the particular division
 
@@ -112,11 +112,25 @@ Install eslint --done--
 * Ask for confirmation before deleting
 
 * Improve UI
+
   * First change the id's of the elements.
+
   * Scroll when the data is exceeding out of the display block. --done--
+
   * Modify homepage --done--
+
   * Change cursor pointer when it is on the image --done--
-  * Modify addTodoPage 
+  
   * Change the text to when checkbox is checked 
 
 * Write tests for handlers 
+
+* Fix big sentence problem 
+
+* Change the id of subTasks
+
+* add the subtasks in the front page.
+
+* Delete button to the end.
+
+* Submit button position

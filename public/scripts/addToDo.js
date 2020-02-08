@@ -27,7 +27,7 @@ const onCheck = function(event) {
 };
 
 const deleteSubtask = function(event) {
-  const deleted = `id=${event.target.id}`;
+  const deleted = `id=${event.target.parentElement.id}`;
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/deleteSubtask', false);
   xhr.send(deleted);
@@ -71,11 +71,10 @@ const saveNewTitle = function(event) {
 const editSubtask = function() {
   if (event.key === 'Enter') {
     const subtask = `subtask=${event.target.value}`;
-    const subtaskId = `id=${event.target.id}`;
-    const parentId = `todoId=${event.target.parentElement.id}`;
+    const subtaskId = `todoId=${event.target.parentElement.id}`;
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/saveSubTask', false);
-    xhr.send(`${subtask}&${parentId}&${subtaskId}`);
+    xhr.send(`${subtask}&${subtaskId}`);
     load();
   }
 };

@@ -1,7 +1,7 @@
 body {
   font-family: sans-serif;
   font-weight: 100;
-  background-color: rgba(128, 128, 128, 0.235);
+  /* background-color: rgba(128, 128, 128, 0.235); */
 }
 
 input::placeholder {
@@ -9,6 +9,7 @@ input::placeholder {
 }
 
 .addTodoTitle {
+  height: 18px;
   outline: none;
   border-radius: 12px;
   border-width: 0 0 2px;
@@ -16,7 +17,7 @@ input::placeholder {
 }
 
 .cb {
-  margin-top: 2.73%;
+  margin-top: 6.73%;
 }
 
 input:hover {
@@ -34,7 +35,7 @@ input:checked + p {
 }
 
 .task {
-  background-color: #fffffff3;
+  background-color: white;
   border-radius: 6px;
   width: 220px;
   padding: 16px;
@@ -69,7 +70,6 @@ input:checked + p {
 }
 
 h1 {
-  text-shadow: 3px 3px 8px lightgrey;
   text-align: center;
   color: rgb(138, 138, 138);
   display: block;
@@ -93,6 +93,7 @@ img {
   margin-top: 1.5px;
   margin-left: 8px;
   width: 12px;
+  display: none;
 }
 
 .title {
@@ -116,13 +117,14 @@ img {
 }
 
 .removeTodo {
-  width: 42px;
+  width: 28px;
+  margin-top: 7px;
 }
 
 .titleInputBox {
   outline: none;
   height: 20px;
-  width: 170px;
+  width: 154px;
   border: none;
   border-color: transparent;
   font-weight: 1000px;
@@ -138,10 +140,16 @@ img {
 
 input[type='text'] {
   font-size: 20px;
+  padding: 10px;
 }
 
 .subtaskInput {
+  border: none;
+  border-bottom: 1px solid gray;
   outline: none;
-  border-radius: 8px;
   margin-bottom: 2px;
+  height: 4px;
+}
+.cbDiv:hover .remove {
+  display: inline;
 }

@@ -42,10 +42,15 @@ const deleteTodo = function(event) {
   load();
 };
 
-const edit = function(event) {
-  const [, , header, list] = event.path;
-  const [, title] = header.innerText.split(': ');
-  const id = list.id;
+const saveNewTodo = function() {
+  let title;
+  if (event.key == 'Enter') {
+    title = event.target.value;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/newTodo', false);
+    xhr.send(`title=${title}`);
+    load();
+  }
 };
 
 const saveNewTitle = function(event) {
@@ -63,26 +68,39 @@ const saveNewTitle = function(event) {
   }
 };
 
-const saveSubTask = function(event) {
-  let newTitle;
-  let titleId;
-  if (event.key == 'Enter') {
-    newTitle = `title=${event.target.value}`;
-    titleId = `id=${event.target.id}`;
-  }
-  if (newTitle) {
+const editSubtask = function() {
+  if (event.key === 'Enter') {
+    const subtask = `subtask=${event.target.value}`;
+    const subtaskId = `id=${event.target.id}`;
+    const parentId = `todoId=${event.target.parentElement.id}`;
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/saveSubTask', false);
-    xhr.send(`${newTitle}&${titleId}`);
+    xhr.send(`${subtask}&${parentId}&${subtaskId}`);
     load();
   }
 };
 
-const sendEditReq = function() {
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/deleteSubtask', false);
-  xhr.send();
-  load();
+const saveSubTask = function(event) {
+  if (event.key === 'Enter') {
+    const newTitle = `title=${event.target.value}`;
+    const titleId = `id=${event.target.id}`;
+    const parentId = `todoId=${event.target.parentElement.id}`;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/saveSubTask', false);
+    xhr.send(`${newTitle}&${titleId}&${parentId}`);
+    load();
+  }
+};
+
+const addSubtask = function() {
+  if (event.key == 'Enter') {
+    const id = event.target.parentElement.parentElement.id;
+    const subtask = event.target.value;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/addSubtask', false);
+    xhr.send(`subtask=${subtask}&id=${id}`);
+    load();
+  }
 };
 
 const main = function() {

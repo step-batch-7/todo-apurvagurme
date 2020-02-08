@@ -10,9 +10,7 @@
   <body onload="load()">
     <h1>TODO LIST</h1>
     <div id="addTodo">
-      <a href="/addToDo.html">
-        <img onclick="addTodo()" src="./images/plus.svg" />
-      </a>
+      <input class="addTodoTitle" type="text" onkeydown="saveNewTodo(event)" />
     </div>
     <br />
     <div

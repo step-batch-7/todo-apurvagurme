@@ -3,6 +3,11 @@ body {
   font-weight: 100;
 }
 
+.addTodoTitle {
+  border-width: 0 0 2px;
+  border-color: rgb(159, 157, 157);
+}
+
 .cb {
   margin-top: 2.73%;
 }
@@ -104,7 +109,7 @@ img {
 }
 
 .removeTodo {
-  width: 40px;
+  width: 42px;
 }
 
 .titleInputBox {
@@ -125,4 +130,9 @@ img {
 
 input[type='text'] {
   font-size: 20px;
+}
+
+.subtaskInput {
+  border-radius: 8px;
+  margin-bottom: 2px;
 }

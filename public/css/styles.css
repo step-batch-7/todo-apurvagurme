@@ -1,7 +1,6 @@
 body {
   font-family: sans-serif;
   font-weight: 100;
-  /* background-color: rgba(128, 128, 128, 0.235); */
 }
 
 input::placeholder {

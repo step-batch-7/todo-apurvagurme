@@ -19,6 +19,17 @@ const deleteItem = function() {
   subtasks.removeChild(subtasks.lastChild);
 };
 
+const sendPostReq = function(url, content, callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    if (this.status === 200) {
+      callback(this.responseText);
+    }
+  };
+  xhr.open('POST', url, false);
+  xhr.send(content);
+};
+
 const onCheck = function(event) {
   const clickedCb = `id=${event.target.value}`;
   const xhr = new XMLHttpRequest();
@@ -28,44 +39,30 @@ const onCheck = function(event) {
 
 const deleteSubtask = function(event) {
   const deleted = `id=${event.target.parentElement.id}`;
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/deleteSubtask', false);
-  xhr.send(deleted);
-  load();
+  sendPostReq('/deleteSubtask', deleted, load);
 };
 
 const deleteTodo = function(event) {
   const deleted = `id=${event.target.id}`;
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/deleteTodo', false);
-  xhr.send(deleted);
-  load();
+  sendPostReq('/deleteTodo', deleted, load);
 };
 
 const saveNewTodo = function() {
   let title;
-  if (event.key == 'Enter') {
+  if (event.key === 'Enter') {
     title = event.target.value;
     event.target.value = '';
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/newTodo', false);
-    xhr.send(`title=${title}`);
-    load();
+    sendPostReq('/newTodo', `title=${title}`, load);
   }
 };
 
 const saveNewTitle = function(event) {
   let newTitle;
   let titleId;
-  if (event.key == 'Enter') {
+  if (event.key === 'Enter') {
     newTitle = `title=${event.target.value}`;
     titleId = `id=${event.target.id}`;
-  }
-  if (newTitle) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/saveNewTitle', false);
-    xhr.send(`${newTitle}&${titleId}`);
-    load();
+    sendPostReq('/saveNewTitle', `${newTitle}&${titleId}`, load);
   }
 };
 
@@ -73,10 +70,7 @@ const editSubtask = function() {
   if (event.key === 'Enter') {
     const subtask = `subtask=${event.target.value}`;
     const subtaskId = `todoId=${event.target.parentElement.id}`;
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/saveSubTask', false);
-    xhr.send(`${subtask}&${subtaskId}`);
-    load();
+    sendPostReq('/saveSubTask', `${subtask}&${subtaskId}`, load);
   }
 };
 
@@ -86,21 +80,15 @@ const saveSubTask = function(event) {
     const titleId = `id=${event.target.id}`;
     const parentId = `todoId=${event.target.parentElement.id}`;
     event.target.focus();
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/saveSubTask', false);
-    xhr.send(`${newTitle}&${titleId}&${parentId}`);
-    load();
+    sendPostReq('/saveSubTask', `${newTitle}&${titleId}&${parentId}`, load);
   }
 };
 
 const addSubtask = function() {
-  if (event.key == 'Enter') {
+  if (event.key === 'Enter') {
     const id = event.target.parentElement.parentElement.id;
     const subtask = event.target.value;
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/addSubtask', false);
-    xhr.send(`subtask=${subtask}&id=${id}`);
-    load();
+    sendPostReq('/addSubtask', `subtask=${subtask}&id=${id}`, load);
   }
 };
 

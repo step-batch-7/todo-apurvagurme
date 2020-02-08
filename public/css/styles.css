@@ -1,9 +1,16 @@
 body {
   font-family: sans-serif;
   font-weight: 100;
+  background-color: rgba(128, 128, 128, 0.235);
+}
+
+input::placeholder {
+  font-size: 16px;
 }
 
 .addTodoTitle {
+  outline: none;
+  border-radius: 12px;
   border-width: 0 0 2px;
   border-color: rgb(159, 157, 157);
 }
@@ -84,7 +91,7 @@ img {
 
 .remove {
   margin-top: 1.5px;
-  margin-left: 55px;
+  margin-left: 8px;
   width: 12px;
 }
 
@@ -99,7 +106,7 @@ img {
 
 #addTodo {
   display: flex;
-  justify-content: center;
+  margin-left: 70px;
 }
 
 #save {
@@ -113,8 +120,9 @@ img {
 }
 
 .titleInputBox {
+  outline: none;
   height: 20px;
-  width: 120px;
+  width: 170px;
   border: none;
   border-color: transparent;
   font-weight: 1000px;
@@ -133,6 +141,7 @@ input[type='text'] {
 }
 
 .subtaskInput {
+  outline: none;
   border-radius: 8px;
   margin-bottom: 2px;
 }

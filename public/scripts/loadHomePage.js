@@ -5,7 +5,7 @@ const getSubTasks = function(tasks) {
     return `
     <div style = "padding-left: 5px; display: flex;" class = "cbDiv" id=${task.subtaskID}>
     <input type="checkbox" onclick="onCheck(event)" class="cb" value=${task.subtaskID} ${status}>
-    <input id=${task.id} class="titleInputBox" type="text" onkeydown="editSubtask(event)" value="${task.subTask}"~ >
+    <input id=${task.subtaskID} class="titleInputBox" type="text" onkeydown="editSubtask(event)" value="${task.subTask}">
     <img class="remove" onclick="deleteSubtask(event)" src="./images/cross.svg" id=${task.subtaskId} ${status}/>
     </div>
     <br>`;
@@ -28,7 +28,7 @@ const toHTML = function(taskTemplate, todo) {
   </div>
   <p><div class='scrollTasks'>${subtasks}</div></p>
   <div>
-  <input class='subtaskInput' type='text' onkeydown="addSubtask(event)">
+  <input class='subtaskInput' type='text' onkeydown="addSubtask(event)" placeholder="Add subtask">
   </div>
   </div>`;
   return taskTemplate;

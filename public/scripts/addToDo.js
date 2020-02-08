@@ -46,6 +46,7 @@ const saveNewTodo = function() {
   let title;
   if (event.key == 'Enter') {
     title = event.target.value;
+    event.target.value = '';
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/newTodo', false);
     xhr.send(`title=${title}`);
@@ -84,6 +85,7 @@ const saveSubTask = function(event) {
     const newTitle = `title=${event.target.value}`;
     const titleId = `id=${event.target.id}`;
     const parentId = `todoId=${event.target.parentElement.id}`;
+    event.target.focus();
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/saveSubTask', false);
     xhr.send(`${newTitle}&${titleId}&${parentId}`);

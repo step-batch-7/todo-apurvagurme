@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf8" />
     <link rel="styleSheet" href="/css/styles.css" />
     <script src="/scripts/addToDo.js"></script>
     <script src="/scripts/requests.js"></script>
@@ -10,7 +11,13 @@
   <body onload="load()">
     <h1>TODO LIST</h1>
     <div id="addTodo">
-      <input class="addTodoTitle" type="text" onkeydown="saveNewTodo(event)" />
+      <input
+        id="addTodoBar"
+        class="addTodoTitle"
+        type="text"
+        onkeydown="saveNewTodo(event)"
+        placeholder="➕Add todo"
+      />
     </div>
     <br />
     <div

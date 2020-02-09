@@ -8,7 +8,6 @@ describe('GET', function() {
         .get('/')
         .set('Accept', '*/*')
         .expect('Content-Type', 'text/html')
-        .expect('Content-Length', '327')
         .expect(200, done);
     });
   });

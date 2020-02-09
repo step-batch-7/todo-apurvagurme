@@ -14,19 +14,19 @@ const addItem = function() {
   subTaskBar.appendChild(subTask);
 };
 
-const onCheck = function(event) {
+const onCheck = function() {
   const clickedCb = `id=${event.target.parentElement.id}`;
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/toggleTaskStatus', false);
   xhr.send(clickedCb);
 };
 
-const deleteSubtask = function(event) {
+const deleteSubtask = function() {
   const deleted = `id=${event.target.parentElement.id}`;
   sendPostReq('/deleteSubtask', deleted, load);
 };
 
-const deleteTodo = function(event) {
+const deleteTodo = function() {
   const deleted = `id=${event.target.parentElement.parentElement.parentElement.id}`;
   sendPostReq('/deleteTodo', deleted, load);
 };
@@ -39,7 +39,7 @@ const saveNewTodo = function() {
   }
 };
 
-const saveNewTitle = function(event) {
+const saveNewTitle = function() {
   if (event.key === 'Enter') {
     const newTitle = `title=${event.target.value}`;
     const titleId = `id=${event.target.parentElement.parentElement.id}`;
@@ -66,6 +66,11 @@ const addSubtask = function() {
 const searchTodo = function() {
   const requiredText = event.target.value;
   sendPostReq('/searchTodo', `title=${requiredText}`, displaySearched);
+};
+
+const searchSubtask = function() {
+  const requiredSubtask = event.target.value;
+  sendPostReq('/searchSubtasks', `subtask=${requiredSubtask}`, displaySearched);
 };
 
 const main = function() {

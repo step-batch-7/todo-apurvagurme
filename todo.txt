@@ -93,7 +93,7 @@ Install eslint --done--
 
 * Edit tasks: Ability to edit their existing tasks. --done--
 
-* Search by title:  Search the list by its title words.
+* Search by title:  Search the list by its title words. --done--
 
 * Search by tasks: Search the todo item by its matched words.
 
@@ -103,13 +103,13 @@ Install eslint --done--
 
 **** extra ****
 
-* Don't submit if nothing is given 
+* Don't submit if nothing is given --done--
 
-* Delete button of subtask should only be visible when mouse is on the particular division
+* Delete button of subtask should only be visible when mouse is on the particular division --done--
 
-* Also change the position of the  delete button of the subtask at the end of line 
+* Also change the position of the  delete button of the subtask at the end of line --done--
 
-* Ask for confirmation before deleting
+* Ask for confirmation before deleting 
 
 * Improve UI
 
@@ -129,8 +129,8 @@ Install eslint --done--
 
 * Change the id of subTasks
 
-* add the subtasks in the front page.
+* add the subtasks in the front page. --done--
 
-* Delete button to the end.
+* Delete button to the end. --done--
 
-* Submit button position
+* Submit button position --done--

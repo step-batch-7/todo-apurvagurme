@@ -63,6 +63,11 @@ const addSubtask = function() {
   }
 };
 
+const searchTodo = function() {
+  const requiredText = event.target.value;
+  sendPostReq('/searchTodo', `title=${requiredText}`, displaySearched);
+};
+
 const main = function() {
   addItem();
   addTodo();

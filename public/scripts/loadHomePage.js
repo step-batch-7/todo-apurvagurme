@@ -34,6 +34,13 @@ const toHTML = function(taskTemplate, todo) {
   return taskTemplate;
 };
 
+const displaySearched = function(SearchedTodoList) {
+  const list = JSON.parse(SearchedTodoList);
+  const html = list.reduce(toHTML, '');
+  const container = document.getElementById('todos');
+  container.innerHTML = html;
+};
+
 const createTasksTemplate = function(todoList) {
   const list = JSON.parse(todoList);
   const html = list.todoRecords.reduce(toHTML, '');

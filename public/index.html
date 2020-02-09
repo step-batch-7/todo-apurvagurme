@@ -18,11 +18,14 @@
         onkeydown="saveNewTodo(event)"
         placeholder="➕Add todo"
       />
+      <input
+        class="searchBar"
+        type="text"
+        placeholder="🔍 Search todo ..."
+        onkeydown="searchTodo(event)"
+      />
     </div>
     <br />
-    <div
-      id="todos"
-      style="display: flex; flex-wrap: wrap; padding-left: 20px; justify-content: space-evenly;"
-    ></div>
+    <div id="todos"></div>
   </body>
 </html>

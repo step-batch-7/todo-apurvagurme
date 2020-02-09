@@ -42,6 +42,7 @@ input:checked + p {
   word-wrap: break-word;
   word-break: break-all;
   hyphens: auto;
+  margin: 10px;
 }
 
 .task:hover {
@@ -149,6 +150,12 @@ input[type='text'] {
   margin-bottom: 2px;
   height: 4px;
 }
+
 .cbDiv:hover .remove {
   display: inline;
+}
+
+.cbDiv {
+  padding-left: 5px;
+  display: flex;
 }

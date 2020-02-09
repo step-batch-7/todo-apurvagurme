@@ -3,10 +3,10 @@ const getSubTasks = function(tasks) {
     let status;
     task.status === true ? (status = 'checked') : (status = '');
     return `
-    <div style = "padding-left: 5px; display: flex;" class = "cbDiv" id=${task.subtaskID}>
-    <input type="checkbox" onclick="onCheck(event)" class="cb" value=${task.subtaskID} ${status}>
-    <input id=${task.subtaskID} class="titleInputBox" type="text" onkeydown="editSubtask(event)" value="${task.subTask}">
-    <img class="remove" onclick="deleteSubtask(event)" src="./images/cross.svg" id=${task.subtaskId} ${status}/>
+    <div class="cbDiv" id=${task.subtaskID}>
+    <input type="checkbox" onclick="onCheck(event)" class="cb" ${status}>
+    <input class="titleInputBox" type="text" onkeydown="editSubtask(event)" value="${task.subTask}">
+    <img class="remove" onclick="deleteSubtask(event)" src="./images/cross.svg" />
     </div>
     <br>`;
   });
@@ -19,11 +19,11 @@ const toHTML = function(taskTemplate, todo) {
     subtasks = getSubTasks(todo.tasks);
   }
   taskTemplate += `
-  <div id=${todo.id} class='task' style="margin: 10px;">
+  <div id=${todo.id} class='task'>
   <div class="titleOfTodo">
-  <input id=title_${todo.id} class="titleInputBox" type="text" value="${todo.title}" onkeydown="saveNewTitle(event)">
+  <input class="titleInputBox" type="text" value="${todo.title}" onkeydown="saveNewTitle(event)">
   <div> 
-  <img class="removeTodo" onclick="deleteTodo(event)" src="./images/dustbin.svg" id=${todo.id}>
+  <img class="removeTodo" onclick="deleteTodo(event)" src="./images/dustbin.svg">
   </div>
   </div>
   <p><div class='scrollTasks'>${subtasks}</div></p>

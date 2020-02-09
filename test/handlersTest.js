@@ -29,3 +29,20 @@ describe('GET/getAllTodo', function() {
       .expect(200, done);
   });
 });
+
+describe('GET/dustbin.svg', function() {
+  it('Checking the serveStaticPage handler', function(done) {
+    request(app.serve.bind(app))
+      .get('/images/dustbin.svg')
+      .expect('Content-type', 'image/svg+xml')
+      .expect(200, done);
+  });
+});
+
+describe('POST/dustbin.svg', function() {
+  it('Checking the serveStaticPage handler', function(done) {
+    request(app.serve.bind(app))
+      .post('/dustbin.svg')
+      .expect(404, done);
+  });
+});

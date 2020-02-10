@@ -15,7 +15,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "npx eslint ./public/scripts ./lib ./server.js && mocha && nyc mocha ",
+    "test": "export DATA_STORE=$(pwd)/test/testTodoData.json; mocha && nyc mocha && npx eslint ./public/scripts ./lib ./server.js",
     "start": "node server.js"
   },
   "repository": {

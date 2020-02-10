@@ -34,11 +34,8 @@ input::placeholder {
 }
 
 .cb {
-  margin-top: 6.73%;
-}
-
-input:hover {
   cursor: pointer;
+  margin-top: 6.73%;
 }
 
 input:checked + p {

@@ -95,7 +95,7 @@ Install eslint --done--
 
 * Search by title:  Search the list by its title words. --done--
 
-* Search by tasks: Search the todo item by its matched words.
+* Search by tasks: Search the todo item by its matched words. 
 
 * User Todo's: A user can log in and log out off their account and work on their own todos.
 
@@ -103,34 +103,32 @@ Install eslint --done--
 
 **** extra ****
 
+* add the subtasks in the front page. --done--
+
+* Delete button to the end. --done--
+
+* Submit button position --done--
+
 * Don't submit if nothing is given --done--
 
 * Delete button of subtask should only be visible when mouse is on the particular division --done--
 
 * Also change the position of the  delete button of the subtask at the end of line --done--
 
-* Ask for confirmation before deleting 
-
-* Improve UI
-
-  * First change the id's of the elements.
-
   * Scroll when the data is exceeding out of the display block. --done--
 
   * Modify homepage --done--
 
   * Change cursor pointer when it is on the image --done--
+
+* Rename variables
+
+* Rename functions and methods
+
+* Ask for confirmation before deleting 
   
-  * Change the text to when checkbox is checked 
+* Change the text to when checkbox is checked 
+
+* Fix big sentence problem - use content editable instead of input 
 
 * Write tests for handlers 
-
-* Fix big sentence problem 
-
-* Change the id of subTasks
-
-* add the subtasks in the front page. --done--
-
-* Delete button to the end. --done--
-
-* Submit button position --done--

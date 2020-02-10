@@ -8,12 +8,11 @@
     <script src="/scripts/loadHomePage.js"></script>
     <title>TODO APP</title>
   </head>
-  <body onload="load()">
+  <body onload="loadAllTodoLists()">
     <h1>TODO LIST</h1>
-    <div id="addTodo">
+    <div id="topBar">
       <input
-        id="addTodoBar"
-        class="addTodoTitle"
+        id="newTodoTitle"
         type="text"
         onkeydown="saveNewTodo(event)"
         placeholder="➕Add todo"
@@ -21,11 +20,11 @@
       <input
         class="searchBar"
         type="text"
-        placeholder="🔍 Search todo ..."
+        placeholder="🔍 Search todo.."
         oninput="searchTodo(event)"
       />
     </div>
     <br />
-    <div id="todos"></div>
+    <div id="todoListContainer"></div>
   </body>
 </html>

@@ -29,20 +29,13 @@ const generateTodoHtml = function(todo) {
   </div>`;
 };
 
-const displaySearched = function(SearchedTodoList) {
-  const list = JSON.parse(SearchedTodoList);
+const renderTodoCollection = function(todoList) {
+  const list = JSON.parse(todoList);
   const html = list.map(generateTodoHtml).join('\n');
   const container = document.getElementById('todoListContainer');
   container.innerHTML = html;
 };
 
-const createTasksTemplate = function(todoList) {
-  const list = JSON.parse(todoList);
-  const html = list.todoRecords.map(generateTodoHtml).join('\n');
-  const container = document.getElementById('todoListContainer');
-  container.innerHTML = html;
-};
-
 const loadAllTodoLists = function() {
-  sendGetReq('/todoList', createTasksTemplate);
+  sendGetReq('/todoList', renderTodoCollection);
 };

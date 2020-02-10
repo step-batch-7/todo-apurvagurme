@@ -66,4 +66,44 @@ describe('POST', function() {
         .expect(200, done);
     });
   });
+
+  describe('POST/deleteSubtask', function() {
+    it('should delete subtask of given id', function(done) {
+      request(app.serve.bind(app))
+        .post('/deleteSubtask')
+        .set('Accept', '*/*')
+        .send('id=3_1')
+        .expect(200, done);
+    });
+  });
+
+  describe('POST/deleteTodo', function() {
+    it('should delete todo of given id', function(done) {
+      request(app.serve.bind(app))
+        .post('/deleteTodo')
+        .set('Accept', '*/*')
+        .send('id=3')
+        .expect(200, done);
+    });
+  });
+
+  describe('POST/addTodo', function() {
+    it('should add todo of given title', function(done) {
+      request(app.serve.bind(app))
+        .post('/newTodo')
+        .set('Accept', '*/*')
+        .send('title=hello')
+        .expect(200, done);
+    });
+  });
+
+  describe('POST/addSubtask', function() {
+    it('should add todo of given title', function(done) {
+      request(app.serve.bind(app))
+        .post('/addSubtask')
+        .set('Accept', '*/*')
+        .send('subtask=hello&id=2')
+        .expect(200, done);
+    });
+  });
 });

@@ -129,7 +129,7 @@ Install eslint --done--
 
 * Implement search in frontend --done--
 
-* Introduce task class
+* Introduce task class --done--
 
 * Write detailed tests 
 

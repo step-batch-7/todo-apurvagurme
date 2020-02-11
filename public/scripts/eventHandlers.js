@@ -43,18 +43,3 @@ const deleteTask = function(taskId) {
   const [todoId] = taskId.split('_');
   sendDataToServer('/deleteTask', {taskId, todoId}, renderTodoList);
 };
-
-const searchTodo = function() {
-  const requiredText = event.target.value;
-  sendDataToServer('/searchTodo', {title: requiredText}, renderTodoList);
-};
-
-const searchTask = function() {
-  const requiredSubtask = event.target.value;
-  sendDataToServer('/searchTask', {subtask: requiredSubtask}, renderTodoList);
-};
-
-const toggleSearchAction = function(checkbox) {
-  checkbox.checked && (searchBar.oninput = searchTask);
-  !checkbox.checked && (searchBar.oninput = searchTodo);
-};

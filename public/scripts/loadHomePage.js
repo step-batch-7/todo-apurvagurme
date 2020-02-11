@@ -3,7 +3,7 @@ const generateTaskHtml = function(task) {
   return `
     <div class="cbDiv" id=${task.id}>
     <input type="checkbox" onclick="toggleTaskStatus('${task.id}')" class="cb" ${status}>
-    <input class="titleInputBox" type="text" onkeydown="renameTask('${task.id}')" value="${task.name}">
+    <input class="taskName" type="text" onkeydown="renameTask('${task.id}')" value="${task.name}">
     <img class="remove" onclick="deleteTask('${task.id}')" src="./images/cross.svg" />
     </div>`;
 };

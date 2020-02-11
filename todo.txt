@@ -125,7 +125,7 @@ Install eslint --done--
 
 * Rename functions and methods --done--
 
-* Remove parent of parent accessing in front end 
+* Remove parent of parent accessing in front end --done--
 
 * Implement search in frontend 
 

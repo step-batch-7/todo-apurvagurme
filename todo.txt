@@ -125,10 +125,14 @@ Install eslint --done--
 
 * Rename functions and methods --done--
 
+* Remove parent of parent accessing in front end 
+
+* Implement search in frontend 
+
+* Write detailed tests 
+
 * Ask for confirmation before deleting 
   
 * Change the text to faded text when checkbox is checked 
 
 * Fix big sentence problem - use content editable instead of input 
-
-* Write tests for handlers 

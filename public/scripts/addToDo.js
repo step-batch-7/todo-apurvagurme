@@ -16,9 +16,7 @@ const addItem = function() {
 
 const onCheck = function() {
   const id = event.target.parentElement.id;
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/toggleTaskStatus', false);
-  xhr.send(JSON.stringify({id}));
+  sendDataToServer('/toggleTaskStatus', {id}, renderTodoCollection);
 };
 
 const deleteSubtask = function() {

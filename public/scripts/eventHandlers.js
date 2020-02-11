@@ -56,3 +56,8 @@ const searchTask = function() {
   const requiredSubtask = event.target.value;
   sendDataToServer('/searchSubtasks', {subtask: requiredSubtask}, renderTodoCollection);
 };
+
+const toggleSearchAction = function(checkbox) {
+  checkbox.checked && (searchBar.oninput = searchTask);
+  !checkbox.checked && (searchBar.oninput = searchTodo);
+};

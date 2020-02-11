@@ -18,11 +18,13 @@
         placeholder="➕Add todo"
       />
       <input
-        class="searchBar"
+        id="searchBar"
         type="text"
         placeholder="🔍 Search todo.."
         oninput="searchTodo(event)"
       />
+      <input type="checkbox" oninput="toggleSearchAction(this)" id="searchFilter">
+      <label for="searchFilter">Task</label>
     </div>
     <br />
     <div id="todoListContainer"></div>

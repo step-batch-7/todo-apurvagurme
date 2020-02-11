@@ -7,11 +7,12 @@ input::placeholder {
   font-size: 16px;
 }
 
-.searchBar {
+#searchBar {
   height: 18px;
   border-radius: 8px;
   border-width: 0 0 2px;
   outline: none;
+  margin-right: 20px;
 }
 
 #todoListContainer {
@@ -20,10 +21,6 @@ input::placeholder {
   padding-left: 20px;
   padding-right: 20px;
   justify-content: space-evenly;
-}
-
-.searchBar {
-  margin-right: 20px;
 }
 
 #newTodoTitle {
@@ -122,7 +119,9 @@ img {
 
 #topBar {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  flex-direction: row-reverse;
+  align-items: center;
   margin-left: 70px;
   margin-right: 70px;
 }

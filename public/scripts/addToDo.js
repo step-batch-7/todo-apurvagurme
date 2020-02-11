@@ -1,19 +1,3 @@
-const addTodo = function() {
-  const task = document.createElement('div');
-  task.className = 'task';
-  const taskBar = document.getElementById('taskBar');
-  taskBar.appendChild(task);
-};
-
-const addItem = function() {
-  const subTask = document.createElement('textarea');
-  subTask.className = 'subTask';
-  subTask.name = 'task';
-  subTask.required;
-  const subTaskBar = document.getElementById('subTasks');
-  subTaskBar.appendChild(subTask);
-};
-
 const onCheck = function() {
   const id = event.target.parentElement.id;
   sendDataToServer('/toggleTaskStatus', {id}, renderTodoCollection);
@@ -69,9 +53,4 @@ const searchTodo = function() {
 const searchSubtask = function() {
   const requiredSubtask = event.target.value;
   sendDataToServer('/searchSubtasks', {subtask: requiredSubtask}, renderTodoCollection);
-};
-
-const main = function() {
-  addItem();
-  addTodo();
 };

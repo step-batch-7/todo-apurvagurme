@@ -23,19 +23,19 @@ const onCheck = function() {
 
 const deleteSubtask = function() {
   const id = event.target.parentElement.id;
-  sendPostReq('/deleteSubtask', JSON.stringify({id}), renderTodoCollection);
+  sendDataToServer('/deleteSubtask', {id}, renderTodoCollection);
 };
 
 const deleteTodo = function() {
   const id = event.target.parentElement.parentElement.parentElement.id;
-  sendPostReq('/deleteTodo', JSON.stringify({id}), renderTodoCollection);
+  sendDataToServer('/deleteTodo', {id}, renderTodoCollection);
 };
 
 const saveNewTodo = function() {
   if (event.key === 'Enter') {
     const title = event.target.value;
     event.target.value = '';
-    sendPostReq('/newTodo', JSON.stringify({title}), renderTodoCollection);
+    sendDataToServer('/newTodo', {title}, renderTodoCollection);
   }
 };
 
@@ -43,7 +43,7 @@ const saveNewTitle = function() {
   if (event.key === 'Enter') {
     const title = event.target.value;
     const id = event.target.parentElement.parentElement.id;
-    sendPostReq('/saveNewTitle', JSON.stringify({title, id}), renderTodoCollection);
+    sendDataToServer('/saveNewTitle', {title, id}, renderTodoCollection);
   }
 };
 
@@ -51,7 +51,7 @@ const editSubtask = function() {
   if (event.key === 'Enter') {
     const subtask = event.target.value;
     const id = event.target.parentElement.id;
-    sendPostReq('/saveSubTask', JSON.stringify({subtask, id}), renderTodoCollection);
+    sendDataToServer('/saveSubTask', {subtask, id}, renderTodoCollection);
   }
 };
 
@@ -59,18 +59,18 @@ const addSubtask = function() {
   if (event.key === 'Enter') {
     const id = event.target.parentElement.parentElement.id;
     const subtask = event.target.value;
-    sendPostReq('/addSubtask', JSON.stringify({id, subtask}), renderTodoCollection);
+    sendDataToServer('/addSubtask', {id, subtask}, renderTodoCollection);
   }
 };
 
 const searchTodo = function() {
   const requiredText = event.target.value;
-  sendPostReq('/searchTodo', JSON.stringify({title: requiredText}), renderTodoCollection);
+  sendDataToServer('/searchTodo', {title: requiredText}, renderTodoCollection);
 };
 
 const searchSubtask = function() {
   const requiredSubtask = event.target.value;
-  sendPostReq('/searchSubtasks', JSON.stringify({subtask: requiredSubtask}), renderTodoCollection);
+  sendDataToServer('/searchSubtasks', {subtask: requiredSubtask}, renderTodoCollection);
 };
 
 const main = function() {

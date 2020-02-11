@@ -1,9 +1,9 @@
 const generateTaskHtml = function(task) {
   const status = task.status === true ? 'checked' : '';
   return `
-    <div class="cbDiv" id=${task.subtaskID}>
+    <div class="cbDiv" id=${task.id}>
     <input type="checkbox" onclick="toggleTaskStatus(event)" class="cb" ${status}>
-    <input class="titleInputBox" type="text" onkeydown="renameTask(event)" value="${task.subTask}">
+    <input class="titleInputBox" type="text" onkeydown="renameTask(event)" value="${task.name}">
     <img class="remove" onclick="deleteTask(event)" src="./images/cross.svg" />
     </div>`;
 };

@@ -59,7 +59,7 @@ Install eslint --done--
 
 * Create a button to delete a particular subTask while writing the todo --done--
 
-* Add a deleteSubtask handler --done--
+* Add a deleteTask handler --done--
 
 * Implement the delete button for deleting a particular subTask --done--
 

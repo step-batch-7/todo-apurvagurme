@@ -25,7 +25,7 @@ const generateTodoHtml = function(todo) {
     </div>`;
 };
 
-const renderTodoCollection = function(todoList) {
+const renderTodoList = function(todoList) {
   const list = JSON.parse(todoList);
   const html = list.map(generateTodoHtml).join('\n');
   const container = document.getElementById('todoListContainer');
@@ -33,5 +33,5 @@ const renderTodoCollection = function(todoList) {
 };
 
 const loadAllTodoLists = function() {
-  sendGetReq('/todoList', renderTodoCollection);
+  sendGetReq('/todoList', renderTodoList);
 };

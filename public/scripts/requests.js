@@ -2,7 +2,7 @@ const sendReq = function(method, url, content, callback){
   const xhr = new XMLHttpRequest();
   xhr.onload = function() {
     if (this.status === 200) {
-      callback(this.responseText);
+      callback && callback(this.responseText);
     }
   };
   xhr.open(method, url);

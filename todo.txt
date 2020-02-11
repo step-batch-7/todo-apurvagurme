@@ -121,13 +121,13 @@ Install eslint --done--
 
   * Change cursor pointer when it is on the image --done--
 
-* Rename variables
+* Rename variables --done--
 
-* Rename functions and methods
+* Rename functions and methods --done--
 
 * Ask for confirmation before deleting 
   
-* Change the text to when checkbox is checked 
+* Change the text to faded text when checkbox is checked 
 
 * Fix big sentence problem - use content editable instead of input 
 

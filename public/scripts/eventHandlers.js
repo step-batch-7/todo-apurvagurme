@@ -2,30 +2,30 @@
 /* eslint-disable no-unused-vars */
 const addTodo = function() {
   if (event.key === 'Enter') {
-    const title = event.target.value;
+    const todoTitle = event.target.value;
     event.target.value = '';
-    sendDataToServer('/addTodo', {title}, renderTodoList);
+    sendDataToServer('/addTodo', {todoTitle}, renderTodoList);
   }
 };
 
 const renameTodo = function() {
   if (event.key === 'Enter') {
-    const title = event.target.value;
-    const id = event.target.parentElement.parentElement.id;
-    sendDataToServer('/renameTodo', {title, id}, renderTodoList);
+    const todoTitle = event.target.value;
+    const todoId = event.target.parentElement.parentElement.id;
+    sendDataToServer('/renameTodo', {todoTitle, id: todoId}, renderTodoList);
   }
 };
 
 const deleteTodo = function() {
-  const id = event.target.parentElement.parentElement.parentElement.id;
-  sendDataToServer('/deleteTodo', {id}, renderTodoList);
+  const todoId = event.target.parentElement.parentElement.parentElement.id;
+  sendDataToServer('/deleteTodo', {todoId}, renderTodoList);
 };
 
 const addTask = function() {
   if (event.key === 'Enter') {
-    const id = event.target.parentElement.parentElement.id;
-    const task = event.target.value;
-    sendDataToServer('/addTask', {id, subtask: task}, renderTodoList);
+    const todoId = event.target.parentElement.parentElement.id;
+    const taskName = event.target.value;
+    sendDataToServer('/addTask', {todoId, taskName}, renderTodoList);
   }
 };
 
@@ -39,15 +39,15 @@ const renameTask = function() {
 };
 
 const toggleTaskStatus = function() {
-  const id = event.target.parentElement.id;
-  const [todoId] = id.split('_');
-  sendDataToServer('/toggleTaskStatus', {id, todoId}, renderTodoList);
+  const taskId = event.target.parentElement.id;
+  const [todoId] = taskId.split('_');
+  sendDataToServer('/toggleTaskStatus', {id: taskId, todoId}, renderTodoList);
 };
 
 const deleteTask = function() {
-  const id = event.target.parentElement.id;
-  const [todoId] = id.split('_');
-  sendDataToServer('/deleteTask', {id, todoId}, renderTodoList);
+  const taskId = event.target.parentElement.id;
+  const [todoId] = taskId.split('_');
+  sendDataToServer('/deleteTask', {id: taskId, todoId}, renderTodoList);
 };
 
 const searchTodo = function() {

@@ -67,10 +67,10 @@ describe('POST', function() {
     });
   });
 
-  describe('POST/deleteSubtask', function() {
+  describe('POST/deleteTask', function() {
     it('should delete subtask of given id', function(done) {
       request(app.serve.bind(app))
-        .post('/deleteSubtask')
+        .post('/deleteTask')
         .set('Accept', '*/*')
         .send('id=3_1')
         .expect(200, done);
@@ -90,17 +90,17 @@ describe('POST', function() {
   describe('POST/addTodo', function() {
     it('should add todo of given title', function(done) {
       request(app.serve.bind(app))
-        .post('/newTodo')
+        .post('/addTodo')
         .set('Accept', '*/*')
         .send('title=hello')
         .expect(200, done);
     });
   });
 
-  describe('POST/addSubtask', function() {
+  describe('POST/addTask', function() {
     it('should add todo of given title', function(done) {
       request(app.serve.bind(app))
-        .post('/addSubtask')
+        .post('/addTask')
         .set('Accept', '*/*')
         .send('subtask=hello&id=2')
         .expect(200, done);

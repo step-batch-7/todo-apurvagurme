@@ -4,7 +4,7 @@ const addTodo = function() {
   if (event.key === 'Enter') {
     const title = event.target.value;
     event.target.value = '';
-    sendDataToServer('/newTodo', {title}, renderTodoCollection);
+    sendDataToServer('/addTodo', {title}, renderTodoCollection);
   }
 };
 
@@ -12,7 +12,7 @@ const renameTodo = function() {
   if (event.key === 'Enter') {
     const title = event.target.value;
     const id = event.target.parentElement.parentElement.id;
-    sendDataToServer('/saveNewTitle', {title, id}, renderTodoCollection);
+    sendDataToServer('/renameTodo', {title, id}, renderTodoCollection);
   }
 };
 
@@ -25,7 +25,7 @@ const addTask = function() {
   if (event.key === 'Enter') {
     const id = event.target.parentElement.parentElement.id;
     const task = event.target.value;
-    sendDataToServer('/addSubtask', {id, subtask: task}, renderTodoCollection);
+    sendDataToServer('/addTask', {id, subtask: task}, renderTodoCollection);
   }
 };
 
@@ -34,7 +34,7 @@ const renameTask = function() {
     const task = event.target.value;
     const id = event.target.parentElement.id;
     const [todoId] = id.split('_');
-    sendDataToServer('/saveSubTask', {subtask: task, id, todoId}, renderTodoCollection);
+    sendDataToServer('/renameTask', {subtask: task, id, todoId}, renderTodoCollection);
   }
 };
 
@@ -47,7 +47,7 @@ const toggleTaskStatus = function() {
 const deleteTask = function() {
   const id = event.target.parentElement.id;
   const [todoId] = id.split('_');
-  sendDataToServer('/deleteSubtask', {id, todoId}, renderTodoCollection);
+  sendDataToServer('/deleteTask', {id, todoId}, renderTodoCollection);
 };
 
 const searchTodo = function() {
@@ -57,7 +57,7 @@ const searchTodo = function() {
 
 const searchTask = function() {
   const requiredSubtask = event.target.value;
-  sendDataToServer('/searchSubtasks', {subtask: requiredSubtask}, renderTodoCollection);
+  sendDataToServer('/searchTask', {subtask: requiredSubtask}, renderTodoCollection);
 };
 
 const toggleSearchAction = function(checkbox) {

@@ -11,18 +11,18 @@ const generateTaskHtml = function(task) {
 const generateTodoHtml = function(todo) {
   const tasks = todo.tasks.map(generateTaskHtml).join('\n');
   return`
-  <div id=${todo.id} class='task'>
-  <div class="titleOfTodo">
-  <input class="titleInputBox" type="text" value="${todo.title}" onkeydown="renameTodo(event)">
-  <div> 
-  <img class="removeTodo" onclick="deleteTodo(event)" src="./images/dustbin.svg">
-  </div>
-  </div>
-  <p><div class='scrollTasks'>${tasks}</div></p>
-  <div>
-  <input class='subtaskInput' type='text' onkeydown="addTask(event)" placeholder="Add subtask">
-  </div>
-  </div>`;
+    <div id=${todo.id} class='task'>
+    <div class="titleOfTodo">
+    <input class="titleInputBox" type="text" value="${todo.title}" onkeydown="renameTodo(event)">
+    <div> 
+    <img class="removeTodo" onclick="deleteTodo(event)" src="./images/dustbin.svg">
+    </div>
+    </div>
+    <p><div class='scrollTasks'>${tasks}</div></p>
+    <div>
+    <input class='subtaskInput' type='text' onkeydown="addTask(event)" placeholder="Add subtask">
+    </div>
+    </div>`;
 };
 
 const renderTodoCollection = function(todoList) {

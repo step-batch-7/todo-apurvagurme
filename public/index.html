@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf8" />
     <link rel="styleSheet" href="/css/styles.css" />
-    <script src="/scripts/addToDo.js"></script>
+    <script src="/scripts/eventHandlers.js"></script>
     <script src="/scripts/requests.js"></script>
     <script src="/scripts/loadHomePage.js"></script>
     <title>TODO APP</title>
@@ -14,7 +14,7 @@
       <input
         id="newTodoTitle"
         type="text"
-        onkeydown="saveNewTodo(event)"
+        onkeydown="addTodo(event)"
         placeholder="➕Add todo"
       />
       <input

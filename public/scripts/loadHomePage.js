@@ -2,9 +2,9 @@ const generateTaskHtml = function(task) {
   const status = task.status === true ? 'checked' : '';
   return `
     <div class="cbDiv" id=${task.subtaskID}>
-    <input type="checkbox" onclick="onCheck(event)" class="cb" ${status}>
-    <input class="titleInputBox" type="text" onkeydown="editSubtask(event)" value="${task.subTask}">
-    <img class="remove" onclick="deleteSubtask(event)" src="./images/cross.svg" />
+    <input type="checkbox" onclick="toggleTaskStatus(event)" class="cb" ${status}>
+    <input class="titleInputBox" type="text" onkeydown="renameTask(event)" value="${task.subTask}">
+    <img class="remove" onclick="deleteTask(event)" src="./images/cross.svg" />
     </div>`;
 };
 
@@ -13,14 +13,14 @@ const generateTodoHtml = function(todo) {
   return`
   <div id=${todo.id} class='task'>
   <div class="titleOfTodo">
-  <input class="titleInputBox" type="text" value="${todo.title}" onkeydown="saveNewTitle(event)">
+  <input class="titleInputBox" type="text" value="${todo.title}" onkeydown="renameTodo(event)">
   <div> 
   <img class="removeTodo" onclick="deleteTodo(event)" src="./images/dustbin.svg">
   </div>
   </div>
   <p><div class='scrollTasks'>${tasks}</div></p>
   <div>
-  <input class='subtaskInput' type='text' onkeydown="addSubtask(event)" placeholder="Add subtask">
+  <input class='subtaskInput' type='text' onkeydown="addTask(event)" placeholder="Add subtask">
   </div>
   </div>`;
 };

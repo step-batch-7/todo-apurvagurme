@@ -1,9 +1,11 @@
-const onCheck = function() {
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+const toggleTaskStatus = function() {
   const id = event.target.parentElement.id;
   sendDataToServer('/toggleTaskStatus', {id}, renderTodoCollection);
 };
 
-const deleteSubtask = function() {
+const deleteTask = function() {
   const id = event.target.parentElement.id;
   sendDataToServer('/deleteSubtask', {id}, renderTodoCollection);
 };
@@ -13,7 +15,7 @@ const deleteTodo = function() {
   sendDataToServer('/deleteTodo', {id}, renderTodoCollection);
 };
 
-const saveNewTodo = function() {
+const addTodo = function() {
   if (event.key === 'Enter') {
     const title = event.target.value;
     event.target.value = '';
@@ -21,7 +23,7 @@ const saveNewTodo = function() {
   }
 };
 
-const saveNewTitle = function() {
+const renameTodo = function() {
   if (event.key === 'Enter') {
     const title = event.target.value;
     const id = event.target.parentElement.parentElement.id;
@@ -29,7 +31,7 @@ const saveNewTitle = function() {
   }
 };
 
-const editSubtask = function() {
+const renameTask = function() {
   if (event.key === 'Enter') {
     const subtask = event.target.value;
     const id = event.target.parentElement.id;
@@ -37,7 +39,7 @@ const editSubtask = function() {
   }
 };
 
-const addSubtask = function() {
+const addTask = function() {
   if (event.key === 'Enter') {
     const id = event.target.parentElement.parentElement.id;
     const subtask = event.target.value;
@@ -50,7 +52,7 @@ const searchTodo = function() {
   sendDataToServer('/searchTodo', {title: requiredText}, renderTodoCollection);
 };
 
-const searchSubtask = function() {
+const searchTask = function() {
   const requiredSubtask = event.target.value;
   sendDataToServer('/searchSubtasks', {subtask: requiredSubtask}, renderTodoCollection);
 };

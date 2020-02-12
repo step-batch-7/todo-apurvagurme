@@ -33,27 +33,39 @@ describe('Todo Class', function(){
 
   describe('#toggleTaskStatus()', function() {
     it('should toggle the status of the task of a valid id', function() {
-      const todo = new Todo('newTodo');
+      const todo = new Todo('newTodo', '0');
       const id = todo.addTask('newTask');
       assert.ok(todo.toggleTaskStatus(id));
     });
 
     it('should not toggle the status of the task of a invalid id', function() {
-      const todo = new Todo('newTodo');
+      const todo = new Todo('newTodo', '0');
       assert.ok(!todo.toggleTaskStatus('0_0'));
     });
   });
 
   describe('#deleteTask()', function() {
     it('should delete the task of a valid id', function() {
-      const todo = new Todo('newTodo');
+      const todo = new Todo('newTodo', '0');
       const id = todo.addTask('newTask');
       assert.ok(todo.deleteTask(id));
     });
 
     it('should not delete the task of a invalid id', function() {
-      const todo = new Todo('newTodo');
+      const todo = new Todo('newTodo', '0');
       assert.ok(!todo.deleteTask('0_0'));
+    });
+  });
+
+  describe('#isSameId()', function() {
+    it('should validate if the asked id is same', function() {
+      const todo = new Todo('newTodo', '0');
+      assert.ok(todo.isSameId('0'));
+    });
+
+    it('should invalidate if the asked id is not same', function() {
+      const todo = new Todo('newTodo', '0');
+      assert.ok(!todo.isSameId('invalidId'));
     });
   });
 });

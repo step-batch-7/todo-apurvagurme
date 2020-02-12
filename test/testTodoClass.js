@@ -1,6 +1,5 @@
 const assert = require('assert');
 const {Todo} = require('../lib/todo');
-0;
 
 describe('Todo Class', function(){
   describe('#rename()', function() {

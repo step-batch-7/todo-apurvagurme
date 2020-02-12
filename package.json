@@ -16,7 +16,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "export DATA_STORE_PATH=$(pwd)/test/resources/testData.json; nyc mocha",
+    "test": "nyc mocha",
     "start": "node server.js"
   },
   "repository": {

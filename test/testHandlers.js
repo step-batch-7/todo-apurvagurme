@@ -1,5 +1,6 @@
 const request = require('supertest');
-const {writeFileSync} = require('fs');
+const sinon = require('sinon');
+const fs = require('fs');
 
 const {app} = require('../lib/handlers');
 
@@ -12,9 +13,6 @@ const testData = [
 ];
 
 describe('handlers', function(){
-  afterEach(function(){
-    writeFileSync(`${__dirname}/resources/testData.json`, JSON.stringify(testData, null, 2));
-  });
   describe('GET', function() {
     it('/<staticFilePath> should serve the static file', function(done) {
       request(app.serve.bind(app))
@@ -37,13 +35,18 @@ describe('handlers', function(){
     });
 
     it('/todoList should serve saved todo list as JSON', function(done) {
+      const stubbedReader = sinon.stub().returns(JSON.stringify(testData));
+      sinon.replace(fs, 'readFileSync', stubbedReader);
       request(app.serve.bind(app))
         .get('/todoList')
         .expect(JSON.stringify(testData))
         .expect('content-type', 'application/json')
         .expect('content-length', '81')
         .expect('date', /./)
-        .expect(200, done);
+        .expect(200, () => {
+          sinon.restore();
+          done();
+        });
     });
 
     it('/<invalidPath> should give 404 and not found message', function(done) {
@@ -58,6 +61,14 @@ describe('handlers', function(){
   });
 
   describe('POST', function() {
+    this.beforeAll(function(){
+      const stubbedReader = sinon.stub().returns(JSON.stringify(testData));
+      sinon.replace(fs, 'readFileSync', stubbedReader);
+      sinon.replace(fs, 'writeFileSync', () => {});
+    });
+    this.afterAll(function(){
+      sinon.restore();
+    });
     it('/todoList should serve saved todo list as JSON', function(done) {
       request(app.serve.bind(app))
         .post('/addTodo')

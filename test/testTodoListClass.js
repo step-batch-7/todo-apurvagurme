@@ -3,80 +3,118 @@ const {TodoList} = require('../lib/todoList');
 
 describe('TodoList Class', function() {
   describe('#addTodo()', function() {
-    it('should add a todo to the todoList when no previous todo', function() {
-      const todoListData = [];
-      const todoList = TodoList.load(todoListData);
-      todoList.addTodo('firstTodo');
-      todoListData.push({title: 'firstTodo', id: '0', tasks: []});
-      assert.deepStrictEqual(todoList, TodoList.load(todoListData));
-    });
-
-    it('should add a todo to the todoList when there is a previous todo', function() {
-      const todoListData = [{title: 'firstTodo', id: '0', tasks: []}];
-      const todoList = TodoList.load(todoListData);
-      todoList.addTodo('secondTodo');
-      todoListData.unshift({title: 'secondTodo', id: '1', tasks: []});
-      assert.deepStrictEqual(todoList, TodoList.load(todoListData));
+    it('should add a todo to the todoList', function() {
+      const todoList = new TodoList('newTodoList');
+      assert.deepStrictEqual(todoList.addTodo('firstTodo'), '0');
+      assert.deepStrictEqual(todoList.addTodo('secondTodo'), '1');
     });
   });
 
   describe('#renameTodo()', function() {
-    it('should rename todo of the given id', function() {
-      const todoListData = [{title: 'firstTodo', id: '0', tasks: []}];
-      const todoList = TodoList.load(todoListData);
-      todoList.renameTodo('0', 'newName');
-      todoListData[0].title = 'newName';
-      assert.deepStrictEqual(todoList, TodoList.load(todoListData));
+    it('should rename todo of valid id', function() {
+      const todoList = new TodoList('newTodo');
+      const id = todoList.addTodo('todo');
+      assert.ok(todoList.renameTodo(id, 'newName'));
+    });
+
+    it('should not rename todo of invalid id', function() {
+      const todoList = new TodoList('newTodo');
+      assert.ok(!todoList.renameTodo('invalidId', 'newName'));
     });
   });
 
   describe('#deleteTodo()', function() {
-    it('should delete todo of the given id', function() {
-      const todoListData = [{title: 'firstTodo', id: '0', tasks: []}];
-      const todoList = TodoList.load(todoListData);
-      todoList.deleteTodo('0');
-      todoListData.pop();
-      assert.deepStrictEqual(todoList, TodoList.load(todoListData));
+    it('should delete todo of valid id', function() {
+      const todoList = new TodoList('newTodo');
+      const id = todoList.addTodo('todo');
+      assert.ok(todoList.deleteTodo(id));
+    });
+
+    it('should not delete todo of invalid id', function() {
+      const todoList = new TodoList('newTodo');
+      assert.ok(!todoList.deleteTodo('invalidId'));
     });
   });
 
   describe('#addTask()', function() {
-    it('should add task to the todo whose id is given', function() {
-      const todoListData = [{title: 'firstTodo', id: '0', tasks: []}];
-      const todoList = TodoList.load(todoListData);
-      todoList.addTask('0', 'NewTask');
-      todoListData[0].tasks.push({name: 'NewTask', id: '0_0', status: false});
-      assert.deepStrictEqual(todoList, TodoList.load(todoListData));
+    it('should add task to todo if todoId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const id = todoList.addTodo('todo');
+      assert.ok(todoList.addTask(id, 'newTask'));
+    });
+
+    it('should not add task if todoId is invalid', function() {
+      const todoList = new TodoList('newTodo');
+      assert.ok(!todoList.deleteTodo('invalidId', 'newTask'));
     });
   });
 
   describe('#renameTask()', function() {
-    it('should rename the task of the specified todo', function() {
-      const todoListData = [{title: 'firstTodo', id: '0', tasks: [{name: 'task', id: '0_0', status: true}]}];
-      const todoList = TodoList.load(todoListData);
-      todoList.renameTask('0_0', 'newName', '0');
-      todoListData[0].tasks[0].name = 'newName';
-      assert.deepStrictEqual(todoList, TodoList.load(todoListData));
+    it('should rename task if todoId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      const taskId = todoList.addTask(todoId, 'newTask');
+      assert.ok(todoList.renameTask(taskId, 'newName', todoId));
+    });
+
+    it('should not rename task if todoId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      const taskId = todoList.addTask(todoId, 'newTask');
+      assert.ok(!todoList.renameTask(taskId, 'newName', 'invalidId'));
+    });
+
+    it('should not rename task if taskId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      todoList.addTask(todoId, 'newTask');
+      assert.ok(!todoList.renameTask('invalidId', 'newName', todoId));
     });
   });
 
   describe('#toggleTaskStatus()', function() {
-    it('should toggle status of task of the specified todo', function() {
-      const todoListData = [{title: 'firstTodo', id: '0', tasks: [{name: 'task', id: '0_0', status: true}]}];
-      const todoList = TodoList.load(todoListData);
-      todoList.toggleTaskStatus('0_0', '0');
-      todoListData[0].tasks[0].status = false;
-      assert.deepStrictEqual(todoList, TodoList.load(todoListData));
+    it('should toggle Status of task if todoId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      const taskId = todoList.addTask(todoId, 'newTask');
+      assert.ok(todoList.toggleTaskStatus(taskId, todoId));
+    });
+
+    it('should not toggle Status of task if todoId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      const taskId = todoList.addTask(todoId, 'newTask');
+      assert.ok(!todoList.toggleTaskStatus(taskId, 'invalidId'));
+    });
+
+    it('should not toggle Status of task if taskId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      todoList.addTask(todoId, 'newTask');
+      assert.ok(!todoList.toggleTaskStatus('invalidId', todoId));
     });
   });
 
   describe('#deleteTask()', function() {
-    it('should delete specified task of the specified todo', function() {
-      const todoListData = [{title: 'firstTodo', id: '0', tasks: [{name: 'task', id: '0_0', status: true}]}];
-      const todoList = TodoList.load(todoListData);
-      todoList.deleteTask('0_0', '0');
-      todoListData[0].tasks.pop();
-      assert.deepStrictEqual(todoList, TodoList.load(todoListData));
+    it('should delete task if todoId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      const taskId = todoList.addTask(todoId, 'newTask');
+      assert.ok(todoList.deleteTask(taskId, todoId));
+    });
+
+    it('should not delete task if todoId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      const taskId = todoList.addTask(todoId, 'newTask');
+      assert.ok(!todoList.deleteTask(taskId, 'invalidId'));
+    });
+
+    it('should not delete task if taskId is valid', function() {
+      const todoList = new TodoList('newTodo');
+      const todoId = todoList.addTodo('todo');
+      todoList.addTask(todoId, 'newTask');
+      assert.ok(!todoList.deleteTask('invalidId', todoId));
     });
   });
 

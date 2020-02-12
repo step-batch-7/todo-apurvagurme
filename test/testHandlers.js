@@ -183,6 +183,17 @@ describe('handlers', function(){
           .expect('date', /./)
           .expect(400, done);
       });
+
+      it('should response "not found" when invalid todoId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/addTask')
+          .send({taskName: 'newTask', todoId: 'invalidId'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
+      });
     });
 
     describe('renameTask', function() {

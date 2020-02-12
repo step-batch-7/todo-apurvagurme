@@ -82,9 +82,8 @@ describe('TodoList Class', function() {
 
   describe('#toJSON()', function() {
     it('should manipulate JSON string', function() {
-      const todoListData = [{title: 'firstTodo', id: '0', tasks: [{name: 'task', id: '0_0', status: true}]}];
-      const todoList = TodoList.load(todoListData);
-      assert.deepStrictEqual(JSON.stringify(todoList), JSON.stringify(todoListData));
+      const todoList = new TodoList([]);
+      assert.deepStrictEqual(JSON.stringify(todoList), JSON.stringify([]));
     });
   });
 });

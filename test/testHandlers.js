@@ -252,6 +252,17 @@ describe('handlers', function(){
           .expect('date', /./)
           .expect(400, done);
       });
+
+      it('should response "bad request" when content-type is specified as json but given data is not a JSON string', function(done) {
+        request(app.serve.bind(app))
+          .post('/addTodo')
+          .set('Content-Type', 'application/json')
+          .send('abc')
+          .expect('')
+          .expect('content-length', '0')
+          .expect('date', /./)
+          .expect(400, done);
+      });
     });
   });
 

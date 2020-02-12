@@ -131,7 +131,7 @@ Install eslint --done--
 
 * Introduce task class --done--
 
-* Write detailed tests 
+* Write detailed tests --done--
 
 * Ask for confirmation before deleting 
   

@@ -68,4 +68,12 @@ describe('Todo Class', function(){
       assert.ok(!todo.isSameId('invalidId'));
     });
   });
+
+  describe('#toJSON()', function() {
+    it('should manipulate JSON string', function() {
+      const todo = new Todo('newTodo', '0');
+      const expectedValue = JSON.stringify({title: 'newTodo', id: '0', tasks: []});
+      assert.deepStrictEqual(JSON.stringify(todo), expectedValue);
+    });
+  });
 });

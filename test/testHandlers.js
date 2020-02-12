@@ -115,6 +115,17 @@ describe('handlers', function(){
           .expect('date', /./)
           .expect(400, done);
       });
+
+      it('should response "not found" when invalid todoId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/renameTodo')
+          .send({todoId: 'invalidId', todoTitle: 'name'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
+      });
     });
 
     describe('deleteTodo', function() {
@@ -137,6 +148,17 @@ describe('handlers', function(){
           .expect('content-length', '0')
           .expect('date', /./)
           .expect(400, done);
+      });
+
+      it('should response "not found" when invalid todoId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/deleteTodo')
+          .send({todoId: 'invalidId'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
       });
     });
 
@@ -184,6 +206,28 @@ describe('handlers', function(){
           .expect('date', /./)
           .expect(400, done);
       });
+
+      it('should response "not found" when invalid todoId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/renameTask')
+          .send({taskId: '0_0', todoId: 'invalidId', newName: 'name'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
+      });
+
+      it('should response "not found" when invalid taskId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/renameTask')
+          .send({taskId: 'invalidId', todoId: '0', newName: 'name'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
+      });
     });
 
     describe('toggleTaskStatus', function() {
@@ -207,6 +251,28 @@ describe('handlers', function(){
           .expect('date', /./)
           .expect(400, done);
       });
+
+      it('should response "not found" when invalid todoId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/toggleTaskStatus')
+          .send({taskId: '0_0', todoId: 'invalidId'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
+      });
+
+      it('should response "not found" when invalid taskId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/toggleTaskStatus')
+          .send({taskId: 'invalidId', todoId: '0'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
+      });
     });
 
     describe('deleteTask', function() {
@@ -229,6 +295,28 @@ describe('handlers', function(){
           .expect('content-length', '0')
           .expect('date', /./)
           .expect(400, done);
+      });
+
+      it('should response "not found" when invalid todoId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/deleteTask')
+          .send({taskId: '0_0', todoId: 'invalidId'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
+      });
+
+      it('should response "not found" when invalid taskId is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/deleteTask')
+          .send({taskId: 'invalidId', todoId: '0'})
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
       });
     });
 

@@ -1,4 +1,4 @@
-const sendReq = function(method, url, content, callback){
+const sendReq = function({method, url, headers}, content, callback){
   const xhr = new XMLHttpRequest();
   xhr.onload = function() {
     if (this.status === 200) {
@@ -6,15 +6,15 @@ const sendReq = function(method, url, content, callback){
     }
   };
   xhr.open(method, url);
+  Object.entries(headers).forEach(([key, value]) => xhr.setRequestHeader(key, value));
   xhr.send(content);
 };
 
-const sendGetReq = function(url, callback) {
-  sendReq('GET', url, undefined, callback);
+const getDataFromServer = function(url, callback) {
+  sendReq({method: 'GET', url, headers: {}}, undefined, callback);
 };
 
-const sendPostReq = sendReq.bind(null, 'POST');
-
 const sendDataToServer = function(url, data, callback){
-  sendPostReq(url, JSON.stringify(data), callback);
+  const headers = {'Content-Type': 'application/json'};
+  sendReq({method: 'POST', url, headers}, JSON.stringify(data), callback);
 };

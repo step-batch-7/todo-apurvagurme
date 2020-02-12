@@ -33,5 +33,5 @@ const renderTodoList = function(todoList) {
 };
 
 const loadAllTodoLists = function() {
-  sendGetReq('/todoList', renderTodoList);
+  getDataFromServer('/todoList', renderTodoList);
 };

@@ -232,14 +232,26 @@ describe('handlers', function(){
       });
     });
 
-    it('/<invalidAction> should give 404 and not found message', function(done) {
-      request(app.serve.bind(app))
-        .post('/invalidAction')
-        .expect('<html><body><h1>Not Found</h1></body></html>')
-        .expect('content-type', 'text/html')
-        .expect('content-length', '44')
-        .expect('date', /./)
-        .expect(404, done);
+    describe('General', function(){
+      it('/<invalidAction> should give 404 and not found message', function(done) {
+        request(app.serve.bind(app))
+          .post('/invalidAction')
+          .expect('<html><body><h1>Not Found</h1></body></html>')
+          .expect('content-type', 'text/html')
+          .expect('content-length', '44')
+          .expect('date', /./)
+          .expect(404, done);
+      });
+
+      it('should response "bad request" when any JSON data sent without mentioning in header', function(done) {
+        request(app.serve.bind(app))
+          .post('/addTodo')
+          .send('{}')
+          .expect('')
+          .expect('content-length', '0')
+          .expect('date', /./)
+          .expect(400, done);
+      });
     });
   });
 

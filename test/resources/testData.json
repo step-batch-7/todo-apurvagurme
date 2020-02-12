@@ -1,12 +1,13 @@
 [
   {
     "title": "fruits",
-    "tasks": [{ "subTask": "apple", "subtaskID": "3_1", "status": true }],
-    "id": 3
-  },
-  {
-    "title": "vegetables",
-    "tasks": [{ "subTask": "potato", "subtaskID": "2_1", "status": true }],
-    "id": 2
+    "id": "0",
+    "tasks": [
+      {
+        "name": "apple",
+        "id": "0_0",
+        "status": true
+      }
+    ]
   }
 ]

@@ -133,6 +133,12 @@ Install eslint --done--
 
 * Write detailed tests --done--
 
+* Have a login page --done--
+
+* Have a sign up page --done--
+
+* Design a primitive login feature 
+
 * Ask for confirmation before deleting 
   
 * Change the text to faded text when checkbox is checked 

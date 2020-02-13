@@ -14,7 +14,7 @@ const testData = {testUserName: [
 ]};
 
 describe('handlers', function(){
-  before(function(){
+  this.beforeEach(function(){
     const isValidSIdStub = sinon.stub();
     isValidSIdStub.withArgs('testId').returns(true);
     const getSessionAttributeStub = sinon.stub();
@@ -23,7 +23,7 @@ describe('handlers', function(){
     sinon.replace(session, 'isValidSId', isValidSIdStub);
     sinon.replace(session, 'getSessionAttribute', getSessionAttributeStub);
   });
-  after(function(){
+  this.afterEach(function(){
     sinon.restore();
   });
   describe('GET', function() {
@@ -73,12 +73,10 @@ describe('handlers', function(){
   });
 
   describe('POST', function() {
-    this.beforeAll(function(){
+    this.beforeEach(function(){
+      const stubbedReader = sinon.stub().returns(JSON.stringify(testData));
+      sinon.replace(fs, 'readFileSync', stubbedReader);
       sinon.replace(fs, 'writeFileSync', () => {});
-    });
-
-    this.afterAll(function(){
-      sinon.restore();
     });
 
     describe('addTodo', function() {

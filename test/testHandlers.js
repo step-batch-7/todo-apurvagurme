@@ -1,25 +1,38 @@
 const request = require('supertest');
 const sinon = require('sinon');
+const session = require('../lib/sessionManager');
 const fs = require('fs');
 
 const {app} = require('../lib/handlers');
 
-const testData = [
+const testData = {testUserName: [
   {
     'title': 'fruits',
     'id': '0',
     'tasks': [{ 'name': 'apple', 'id': '0_0', 'status': true }]
   }
-];
+]};
 
 describe('handlers', function(){
+  before(function(){
+    const isValidSIdStub = sinon.stub();
+    isValidSIdStub.withArgs('testId').returns(true);
+    const getSessionAttributeStub = sinon.stub();
+    getSessionAttributeStub.withArgs('testId', 'userName').returns('testUserName');
+    sinon.replace(session, 'addSession', () => {});
+    sinon.replace(session, 'isValidSId', isValidSIdStub);
+    sinon.replace(session, 'getSessionAttribute', getSessionAttributeStub);
+  });
+  after(function(){
+    sinon.restore();
+  });
   describe('GET', function() {
     it('/<staticFilePath> should serve the static file', function(done) {
       request(app.serve.bind(app))
-        .get('/index.html')
-        .expect(/TODO LIST/)
+        .get('/login.html')
+        .expect(/Login/)
         .expect('content-type', 'text/html')
-        .expect('content-length', '928')
+        .expect('content-length', '459')
         .expect('date', /./)
         .expect(200, done);
     });
@@ -27,6 +40,7 @@ describe('handlers', function(){
     it('/ should serve index.html', function(done) {
       request(app.serve.bind(app))
         .get('/')
+        .set('cookie', '_SID=testId')
         .expect(/TODO LIST/)
         .expect('content-type', 'text/html')
         .expect('content-length', '928')
@@ -39,14 +53,12 @@ describe('handlers', function(){
       sinon.replace(fs, 'readFileSync', stubbedReader);
       request(app.serve.bind(app))
         .get('/todoList')
-        .expect(JSON.stringify(testData))
+        .set('cookie', '_SID=testId')
+        .expect(JSON.stringify(testData.testUserName))
         .expect('content-type', 'application/json')
         .expect('content-length', '81')
         .expect('date', /./)
-        .expect(200, () => {
-          sinon.restore();
-          done();
-        });
+        .expect(200, done);
     });
 
     it('/<invalidPath> should give 404 and not found message', function(done) {
@@ -62,8 +74,6 @@ describe('handlers', function(){
 
   describe('POST', function() {
     this.beforeAll(function(){
-      const stubbedReader = sinon.stub().returns(JSON.stringify(testData));
-      sinon.replace(fs, 'readFileSync', stubbedReader);
       sinon.replace(fs, 'writeFileSync', () => {});
     });
 
@@ -75,6 +85,7 @@ describe('handlers', function(){
       it('should add the specified todo when required fields are given', function(done) {
         request(app.serve.bind(app))
           .post('/addTodo')
+          .set('cookie', '_SID=testId')
           .send({todoTitle: 'newTodo'})
           .expect('[{"title":"newTodo","id":"1","tasks":[]},{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":true}]}]')
           .expect('content-type', 'application/json')
@@ -86,6 +97,7 @@ describe('handlers', function(){
       it('should response "bad request" when required fields are not given', function(done) {
         request(app.serve.bind(app))
           .post('/addTodo')
+          .set('cookie', '_SID=testId')
           .send({})
           .expect('')
           .expect('content-length', '0')
@@ -98,6 +110,7 @@ describe('handlers', function(){
       it('should rename the todo title of the given id when required fields are given', function(done) {
         request(app.serve.bind(app))
           .post('/renameTodo')
+          .set('cookie', '_SID=testId')
           .send({todoTitle: 'newName', todoId: '0'})
           .expect('[{"title":"newName","id":"0","tasks":[{"name":"apple","id":"0_0","status":true}]}]')
           .expect('content-type', 'application/json')
@@ -109,6 +122,7 @@ describe('handlers', function(){
       it('should response "bad request" when required fields are not given', function(done) {
         request(app.serve.bind(app))
           .post('/renameTodo')
+          .set('cookie', '_SID=testId')
           .send({})
           .expect('')
           .expect('content-length', '0')
@@ -119,6 +133,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app.serve.bind(app))
           .post('/renameTodo')
+          .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId', todoTitle: 'name'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -132,6 +147,7 @@ describe('handlers', function(){
       it('should delete the todo of the given id when required fields are given', function(done) {
         request(app.serve.bind(app))
           .post('/deleteTodo')
+          .set('cookie', '_SID=testId')
           .send({ todoId: '0'})
           .expect('[]')
           .expect('content-type', 'application/json')
@@ -143,6 +159,7 @@ describe('handlers', function(){
       it('should response "bad request" when required fields are not given', function(done) {
         request(app.serve.bind(app))
           .post('/deleteTodo')
+          .set('cookie', '_SID=testId')
           .send({})
           .expect('')
           .expect('content-length', '0')
@@ -153,6 +170,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app.serve.bind(app))
           .post('/deleteTodo')
+          .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -166,6 +184,7 @@ describe('handlers', function(){
       it('should add task to the specified todo when required fields are given', function(done) {
         request(app.serve.bind(app))
           .post('/addTask')
+          .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":true},{"name":"newTask","id":"0_1","status":false}]}]')
           .expect('content-type', 'application/json')
@@ -177,6 +196,7 @@ describe('handlers', function(){
       it('should response "bad request" when required fields are not given', function(done) {
         request(app.serve.bind(app))
           .post('/addTask')
+          .set('cookie', '_SID=testId')
           .send({})
           .expect('')
           .expect('content-length', '0')
@@ -187,6 +207,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app.serve.bind(app))
           .post('/addTask')
+          .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: 'invalidId'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -200,6 +221,7 @@ describe('handlers', function(){
       it('should add task to the specified todo when required fields are given', function(done) {
         request(app.serve.bind(app))
           .post('/renameTask')
+          .set('cookie', '_SID=testId')
           .send({newName: 'mango', taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"mango","id":"0_0","status":true}]}]')
           .expect('content-type', 'application/json')
@@ -211,6 +233,7 @@ describe('handlers', function(){
       it('should response "bad request" when required fields are not given', function(done) {
         request(app.serve.bind(app))
           .post('/renameTask')
+          .set('cookie', '_SID=testId')
           .send({})
           .expect('')
           .expect('content-length', '0')
@@ -221,6 +244,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app.serve.bind(app))
           .post('/renameTask')
+          .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId', newName: 'name'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -232,6 +256,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid taskId is given', function(done) {
         request(app.serve.bind(app))
           .post('/renameTask')
+          .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0', newName: 'name'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -245,6 +270,7 @@ describe('handlers', function(){
       it('should add task to the specified todo when required fields are given', function(done) {
         request(app.serve.bind(app))
           .post('/toggleTaskStatus')
+          .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":false}]}]')
           .expect('content-type', 'application/json')
@@ -256,6 +282,7 @@ describe('handlers', function(){
       it('should response "bad request" when required fields are not given', function(done) {
         request(app.serve.bind(app))
           .post('/toggleTaskStatus')
+          .set('cookie', '_SID=testId')
           .send({})
           .expect('')
           .expect('content-length', '0')
@@ -266,6 +293,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app.serve.bind(app))
           .post('/toggleTaskStatus')
+          .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -277,6 +305,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid taskId is given', function(done) {
         request(app.serve.bind(app))
           .post('/toggleTaskStatus')
+          .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -290,6 +319,7 @@ describe('handlers', function(){
       it('should delete specified task of the specified todo when required fields are given', function(done) {
         request(app.serve.bind(app))
           .post('/deleteTask')
+          .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[]}]')
           .expect('content-type', 'application/json')
@@ -301,6 +331,7 @@ describe('handlers', function(){
       it('should response "bad request" when required fields are not given', function(done) {
         request(app.serve.bind(app))
           .post('/deleteTask')
+          .set('cookie', '_SID=testId')
           .send({})
           .expect('')
           .expect('content-length', '0')
@@ -311,6 +342,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app.serve.bind(app))
           .post('/deleteTask')
+          .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -322,6 +354,7 @@ describe('handlers', function(){
       it('should response "not found" when invalid taskId is given', function(done) {
         request(app.serve.bind(app))
           .post('/deleteTask')
+          .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')

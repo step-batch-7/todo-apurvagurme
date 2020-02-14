@@ -72,7 +72,7 @@ describe('handlers', function(){
     it('/ should redirect to login page', function(done) {
       request(app)
         .get('/')
-        .expect('')
+        .expect('Found. Redirecting to login.html')
         .expect('location', 'login.html')
         .expect('date', /./)
         .expect(302, done);
@@ -83,7 +83,7 @@ describe('handlers', function(){
         .get('/todoList')
         .set('cookie', '_SID=testId')
         .expect(JSON.stringify(testTodoData.testUserName))
-        .expect('content-type', 'application/json')
+        .expect('content-type', 'application/json; charset=utf-8')
         .expect('content-length', '81')
         .expect('date', /./)
         .expect(200, done);
@@ -109,7 +109,7 @@ describe('handlers', function(){
           .set('cookie', '_SID=testId')
           .send({todoTitle: 'newTodo'})
           .expect('[{"title":"newTodo","id":"1","tasks":[]},{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":true}]}]')
-          .expect('content-type', 'application/json')
+          .expect('content-type', 'application/json; charset=utf-8')
           .expect('content-length', '121')
           .expect('date', /./)
           .expect(200, done);
@@ -134,7 +134,7 @@ describe('handlers', function(){
           .set('cookie', '_SID=testId')
           .send({todoTitle: 'newName', todoId: '0'})
           .expect('[{"title":"newName","id":"0","tasks":[{"name":"apple","id":"0_0","status":true}]}]')
-          .expect('content-type', 'application/json')
+          .expect('content-type', 'application/json; charset=utf-8')
           .expect('content-length', '82')
           .expect('date', /./)
           .expect(200, done);
@@ -171,7 +171,7 @@ describe('handlers', function(){
           .set('cookie', '_SID=testId')
           .send({ todoId: '0'})
           .expect('[]')
-          .expect('content-type', 'application/json')
+          .expect('content-type', 'application/json; charset=utf-8')
           .expect('content-length', '2')
           .expect('date', /./)
           .expect(200, done);
@@ -208,7 +208,7 @@ describe('handlers', function(){
           .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":true},{"name":"newTask","id":"0_1","status":false}]}]')
-          .expect('content-type', 'application/json')
+          .expect('content-type', 'application/json; charset=utf-8')
           .expect('content-length', '126')
           .expect('date', /./)
           .expect(200, done);
@@ -245,7 +245,7 @@ describe('handlers', function(){
           .set('cookie', '_SID=testId')
           .send({newName: 'mango', taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"mango","id":"0_0","status":true}]}]')
-          .expect('content-type', 'application/json')
+          .expect('content-type', 'application/json; charset=utf-8')
           .expect('content-length', '81')
           .expect('date', /./)
           .expect(200, done);
@@ -294,7 +294,7 @@ describe('handlers', function(){
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":false}]}]')
-          .expect('content-type', 'application/json')
+          .expect('content-type', 'application/json; charset=utf-8')
           .expect('content-length', '82')
           .expect('date', /./)
           .expect(200, done);
@@ -343,7 +343,7 @@ describe('handlers', function(){
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[]}]')
-          .expect('content-type', 'application/json')
+          .expect('content-type', 'application/json; charset=utf-8')
           .expect('content-length', '40')
           .expect('date', /./)
           .expect(200, done);
@@ -401,7 +401,7 @@ describe('handlers', function(){
         request(app)
           .post('/login')
           .send('userName=userName&password=password')
-          .expect('Set-Cookie', '_SID=testSId')
+          .expect('Set-Cookie', '_SID=testSId; Path=/')
           .expect('date', /./)
           .expect('location', 'index.html')
           .expect(302, done);
@@ -440,7 +440,7 @@ describe('handlers', function(){
       it('should response with json error when content-type is specified as json but given data is not a JSON string', function(done) {
         request(app)
           .post('/addTodo')
-          .set('Content-Type', 'application/json')
+          .set('Content-Type', 'application/json; charset=utf-8')
           .send('abc')
           .expect(/Error/)
           .expect('content-length', '1263')

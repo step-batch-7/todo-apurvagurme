@@ -1,6 +1,10 @@
 const sendReq = function({method, url, headers}, content, callback){
   const xhr = new XMLHttpRequest();
   xhr.onload = function() {
+    if(this.status === 401) {
+      location.assign('login.html');
+      return;
+    }
     if (this.status === 200) {
       callback && callback(this.responseText);
     }

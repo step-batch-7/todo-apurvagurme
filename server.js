@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-const { validateFields, verifyPageAccess, serveSavedTodoList, registerNewUser, login, addTodo, renameTodo, deleteTodo, addTask, renameTask, toggleTaskStatus, deleteTask} = require('./lib/handlers');
+const { validateFields, verifyPageAccess, serveSavedTodoList, registerNewUser, login, addTodo, renameTodo, deleteTodo, addTask, renameTask, toggleTaskStatus, deleteTask, checkAuthorization} = require('./lib/handlers');
 
 const app = express();
 
@@ -12,11 +12,12 @@ app.use(express.urlencoded({extended: true}));
 
 app.get('/', verifyPageAccess);
 app.get('/index.html', verifyPageAccess);
-app.get('/todoList', serveSavedTodoList);
+app.get('/todoList', checkAuthorization, serveSavedTodoList);
 app.get('/*', express.static('public'));
 
 app.post('/signUp', validateFields('userName', 'password'), registerNewUser);
 app.post('/login', validateFields('userName', 'password'), login);
+app.post(['/addTodo', '/renameTodo', '/deleteTodo', '/addTask', '/renameTask', '/toggleTaskStatus', '/deleteTask'], checkAuthorization);
 app.post('/addTodo', validateFields('todoTitle'), addTodo);
 app.post('/renameTodo', validateFields('todoId', 'todoTitle'), renameTodo);
 app.post('/deleteTodo', validateFields('todoId'), deleteTodo);

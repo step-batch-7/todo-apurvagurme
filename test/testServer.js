@@ -6,7 +6,7 @@ const session = require('../lib/sessionManager');
 process.env.DATA_STORE_PATH = 'testDataPath';
 process.env.USERS_INFO_PATH = 'testUsersInfo';
 
-const {app} = require('../lib/handlers');
+const {app, server} = require('../server.js');
 
 const testTodoData = {testUserName: [
   {
@@ -44,11 +44,12 @@ describe('handlers', function(){
 
   after(function(){
     sinon.restore();
+    server.close();
   });
 
   describe('GET', function() {
     it('/<staticFilePath> should serve the static file', function(done) {
-      request(app.serve.bind(app))
+      request(app)
         .get('/login.html')
         .expect(/Login/)
         .expect('content-type', 'text/html')
@@ -58,7 +59,7 @@ describe('handlers', function(){
     });
 
     it('/ should serve index.html', function(done) {
-      request(app.serve.bind(app))
+      request(app)
         .get('/')
         .set('cookie', '_SID=testId')
         .expect(/TODO LIST/)
@@ -69,7 +70,7 @@ describe('handlers', function(){
     });
 
     it('/ should redirect to login page', function(done) {
-      request(app.serve.bind(app))
+      request(app)
         .get('/')
         .expect('')
         .expect('location', 'login.html')
@@ -78,7 +79,7 @@ describe('handlers', function(){
     });
 
     it('/todoList should serve saved todo list as JSON', function(done) {
-      request(app.serve.bind(app))
+      request(app)
         .get('/todoList')
         .set('cookie', '_SID=testId')
         .expect(JSON.stringify(testTodoData.testUserName))
@@ -89,7 +90,7 @@ describe('handlers', function(){
     });
 
     it('/<invalidPath> should give 404 and not found message', function(done) {
-      request(app.serve.bind(app))
+      request(app)
         .get('/invalidPath')
         .expect('<html><body><h1>Not Found</h1></body></html>')
         .expect('content-type', 'text/html')
@@ -103,7 +104,7 @@ describe('handlers', function(){
 
     describe('addTodo', function() {
       it('should add the specified todo when required fields are given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/addTodo')
           .set('cookie', '_SID=testId')
           .send({todoTitle: 'newTodo'})
@@ -115,7 +116,7 @@ describe('handlers', function(){
       });
 
       it('should response "bad request" when required fields are not given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/addTodo')
           .set('cookie', '_SID=testId')
           .send({})
@@ -128,7 +129,7 @@ describe('handlers', function(){
 
     describe('renameTodo', function() {
       it('should rename the todo title of the given id when required fields are given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/renameTodo')
           .set('cookie', '_SID=testId')
           .send({todoTitle: 'newName', todoId: '0'})
@@ -140,7 +141,7 @@ describe('handlers', function(){
       });
 
       it('should response "bad request" when required fields are not given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/renameTodo')
           .set('cookie', '_SID=testId')
           .send({})
@@ -151,7 +152,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid todoId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/renameTodo')
           .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId', todoTitle: 'name'})
@@ -165,7 +166,7 @@ describe('handlers', function(){
 
     describe('deleteTodo', function() {
       it('should delete the todo of the given id when required fields are given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/deleteTodo')
           .set('cookie', '_SID=testId')
           .send({ todoId: '0'})
@@ -177,7 +178,7 @@ describe('handlers', function(){
       });
 
       it('should response "bad request" when required fields are not given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/deleteTodo')
           .set('cookie', '_SID=testId')
           .send({})
@@ -188,7 +189,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid todoId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/deleteTodo')
           .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId'})
@@ -202,7 +203,7 @@ describe('handlers', function(){
 
     describe('addTask', function() {
       it('should add task to the specified todo when required fields are given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/addTask')
           .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: '0'})
@@ -214,7 +215,7 @@ describe('handlers', function(){
       });
 
       it('should response "bad request" when required fields are not given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/addTask')
           .set('cookie', '_SID=testId')
           .send({})
@@ -225,7 +226,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid todoId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/addTask')
           .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: 'invalidId'})
@@ -239,7 +240,7 @@ describe('handlers', function(){
 
     describe('renameTask', function() {
       it('should add task to the specified todo when required fields are given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/renameTask')
           .set('cookie', '_SID=testId')
           .send({newName: 'mango', taskId: '0_0', todoId: '0'})
@@ -251,7 +252,7 @@ describe('handlers', function(){
       });
 
       it('should response "bad request" when required fields are not given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/renameTask')
           .set('cookie', '_SID=testId')
           .send({})
@@ -262,7 +263,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid todoId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/renameTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId', newName: 'name'})
@@ -274,7 +275,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid taskId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/renameTask')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0', newName: 'name'})
@@ -288,7 +289,7 @@ describe('handlers', function(){
 
     describe('toggleTaskStatus', function() {
       it('should add task to the specified todo when required fields are given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: '0'})
@@ -300,7 +301,7 @@ describe('handlers', function(){
       });
 
       it('should response "bad request" when required fields are not given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({})
@@ -311,7 +312,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid todoId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
@@ -323,7 +324,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid taskId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
@@ -337,7 +338,7 @@ describe('handlers', function(){
 
     describe('deleteTask', function() {
       it('should delete specified task of the specified todo when required fields are given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: '0'})
@@ -349,7 +350,7 @@ describe('handlers', function(){
       });
 
       it('should response "bad request" when required fields are not given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/deleteTask')
           .set('cookie', '_SID=testId')
           .send({})
@@ -360,7 +361,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid todoId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
@@ -372,7 +373,7 @@ describe('handlers', function(){
       });
 
       it('should response "not found" when invalid taskId is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
@@ -386,7 +387,7 @@ describe('handlers', function(){
 
     describe('signup', function() {
       it('should register new user and redirect to login page', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/signUp')
           .send('userName=userName2&password=password')
           .expect('date', /./)
@@ -397,7 +398,7 @@ describe('handlers', function(){
 
     describe('login', function() {
       it('should redirect to index.html if valid credentials are given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/login')
           .send('userName=userName&password=password')
           .expect('Set-Cookie', '_SID=testSId')
@@ -407,7 +408,7 @@ describe('handlers', function(){
       });
 
       it('should redirect to login.html if invalid password is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/login')
           .send('userName=userName&password=invalid')
           .expect('date', /./)
@@ -416,7 +417,7 @@ describe('handlers', function(){
       });
 
       it('should redirect to login.html if invalid username is given', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/login')
           .send('userName=invalid&password=password')
           .expect('date', /./)
@@ -427,7 +428,7 @@ describe('handlers', function(){
 
     describe('General', function(){
       it('/<invalidAction> should give 404 and not found message', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/invalidAction')
           .expect('<html><body><h1>Not Found</h1></body></html>')
           .expect('content-type', 'text/html')
@@ -437,7 +438,7 @@ describe('handlers', function(){
       });
 
       it('should response "bad request" when any JSON data sent without mentioning in header', function(done) {
-        request(app.serve.bind(app))
+        request(app)
           .post('/addTodo')
           .send('{}')
           .expect('')
@@ -446,13 +447,14 @@ describe('handlers', function(){
           .expect(400, done);
       });
 
-      it('should response "bad request" when content-type is specified as json but given data is not a JSON string', function(done) {
-        request(app.serve.bind(app))
+      it('should response with json error when content-type is specified as json but given data is not a JSON string', function(done) {
+        request(app)
           .post('/addTodo')
           .set('Content-Type', 'application/json')
           .send('abc')
-          .expect('')
-          .expect('content-length', '0')
+          .expect(/Error/)
+          .expect('content-length', '1263')
+          .expect('Content-Type', 'text/html; charset=utf-8')
           .expect('date', /./)
           .expect(400, done);
       });
@@ -461,7 +463,7 @@ describe('handlers', function(){
 
   describe('<not-allowedMethod>', function() {
     it('/todoList should serve saved todo list as JSON', function(done) {
-      request(app.serve.bind(app))
+      request(app)
         .put('/path')
         .send({todoTitle: 'newTodo'})
         .expect('<html><body><h1>Method Not Allowed</h1></body></html>')

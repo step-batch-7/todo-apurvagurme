@@ -141,7 +141,7 @@ Install eslint --done--
 
 * add test for not login case for index.html --done--
 
-* move to express primarily
+* move to express primarily --done--
 
 * Ask for confirmation before deleting 
   

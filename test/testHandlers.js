@@ -48,6 +48,15 @@ describe('handlers', function(){
         .expect(200, done);
     });
 
+    it('/ should redirect to login page', function(done) {
+      request(app.serve.bind(app))
+        .get('/')
+        .expect('')
+        .expect('location', 'login.html')
+        .expect('date', /./)
+        .expect(302, done);
+    });
+
     it('/todoList should serve saved todo list as JSON', function(done) {
       const stubbedReader = sinon.stub().returns(JSON.stringify(testData));
       sinon.replace(fs, 'readFileSync', stubbedReader);

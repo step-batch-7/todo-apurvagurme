@@ -137,7 +137,9 @@ Install eslint --done--
 
 * Have a sign up page --done--
 
-* Design a primitive login feature 
+* Design a primitive login feature --done--
+
+* add test for not login case for index.html
 
 * Ask for confirmation before deleting 
   

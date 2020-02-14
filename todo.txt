@@ -143,6 +143,10 @@ Install eslint --done--
 
 * move to express primarily --done--
 
+* use express.static --done--
+
+* Attach morgan to log request --done--
+
 * Ask for confirmation before deleting 
   
 * Change the text to faded text when checkbox is checked 

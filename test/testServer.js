@@ -52,7 +52,7 @@ describe('handlers', function(){
       request(app)
         .get('/login.html')
         .expect(/Login/)
-        .expect('content-type', 'text/html')
+        .expect('content-type', 'text/html; charset=UTF-8')
         .expect('content-length', '459')
         .expect('date', /./)
         .expect(200, done);
@@ -63,7 +63,7 @@ describe('handlers', function(){
         .get('/')
         .set('cookie', '_SID=testId')
         .expect(/TODO LIST/)
-        .expect('content-type', 'text/html')
+        .expect('content-type', 'text/html; charset=UTF-8')
         .expect('content-length', '928')
         .expect('date', /./)
         .expect(200, done);
@@ -92,9 +92,9 @@ describe('handlers', function(){
     it('/<invalidPath> should give 404 and not found message', function(done) {
       request(app)
         .get('/invalidPath')
-        .expect('<html><body><h1>Not Found</h1></body></html>')
-        .expect('content-type', 'text/html')
-        .expect('content-length', '44')
+        .expect(/Cannot GET/)
+        .expect('content-type', 'text/html; charset=utf-8')
+        .expect('content-length', '150')
         .expect('date', /./)
         .expect(404, done);
     });
@@ -156,9 +156,9 @@ describe('handlers', function(){
           .post('/renameTodo')
           .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId', todoTitle: 'name'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '150')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -193,9 +193,9 @@ describe('handlers', function(){
           .post('/deleteTodo')
           .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '150')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -230,9 +230,9 @@ describe('handlers', function(){
           .post('/addTask')
           .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: 'invalidId'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '147')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -267,9 +267,9 @@ describe('handlers', function(){
           .post('/renameTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId', newName: 'name'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '150')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -279,9 +279,9 @@ describe('handlers', function(){
           .post('/renameTask')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0', newName: 'name'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '150')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -316,9 +316,9 @@ describe('handlers', function(){
           .post('/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '156')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -328,9 +328,9 @@ describe('handlers', function(){
           .post('/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '156')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -365,9 +365,9 @@ describe('handlers', function(){
           .post('/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '150')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -377,9 +377,9 @@ describe('handlers', function(){
           .post('/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '150')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -430,9 +430,9 @@ describe('handlers', function(){
       it('/<invalidAction> should give 404 and not found message', function(done) {
         request(app)
           .post('/invalidAction')
-          .expect('<html><body><h1>Not Found</h1></body></html>')
-          .expect('content-type', 'text/html')
-          .expect('content-length', '44')
+          .expect(/Cannot POST/)
+          .expect('content-type', 'text/html; charset=utf-8')
+          .expect('content-length', '153')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -462,15 +462,15 @@ describe('handlers', function(){
   });
 
   describe('<not-allowedMethod>', function() {
-    it('/todoList should serve saved todo list as JSON', function(done) {
+    it('should response "cannot <methodName>" when other than valid methods is used', function(done) {
       request(app)
         .put('/path')
         .send({todoTitle: 'newTodo'})
-        .expect('<html><body><h1>Method Not Allowed</h1></body></html>')
-        .expect('content-type', 'text/html')
-        .expect('content-length', '53')
+        .expect(/Cannot PUT/)
+        .expect('content-type', 'text/html; charset=utf-8')
+        .expect('content-length', '143')
         .expect('date', /./)
-        .expect(405, done);
+        .expect(404, done);
     });
   });
 });

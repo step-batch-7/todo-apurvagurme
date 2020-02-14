@@ -1,11 +1,14 @@
+const fs = require('fs');
 const request = require('supertest');
 const sinon = require('sinon');
 const session = require('../lib/sessionManager');
-const fs = require('fs');
+
+process.env.DATA_STORE_PATH = 'testDataPath';
+process.env.USERS_INFO_PATH = 'testUsersInfo';
 
 const {app} = require('../lib/handlers');
 
-const testData = {testUserName: [
+const testTodoData = {testUserName: [
   {
     'title': 'fruits',
     'id': '0',
@@ -13,19 +16,36 @@ const testData = {testUserName: [
   }
 ]};
 
+const testUserData = {userName: {password: 'password'}};
+
 describe('handlers', function(){
-  this.beforeEach(function(){
+  this.beforeAll(function(){
+    const originalReader = fs.readFileSync;
+    const mockedReader = sinon.stub();
+    mockedReader.withArgs('testDataPath', 'UTF8').returns(JSON.stringify(testTodoData));
+    mockedReader.withArgs('testUsersInfo', 'UTF8').returns(JSON.stringify(testUserData));
+    mockedReader.callsFake(originalReader);
+    sinon.replace(fs, 'readFileSync', mockedReader);
+    const originalExists = fs.existsSync;
+    const mockedExistChecker = sinon.stub();
+    mockedExistChecker.withArgs('testDataPath').returns(true);
+    mockedExistChecker.withArgs('testUsersInfo').returns(true);
+    mockedExistChecker.callsFake(originalExists);
+    sinon.replace(fs, 'existsSync', mockedExistChecker);
+    sinon.replace(fs, 'statSync', sinon.stub().returns({isFile: () => true}));
     const isValidSIdStub = sinon.stub();
     isValidSIdStub.withArgs('testId').returns(true);
     const getSessionAttributeStub = sinon.stub();
     getSessionAttributeStub.withArgs('testId', 'userName').returns('testUserName');
-    sinon.replace(session, 'addSession', () => {});
+    sinon.replace(session, 'addSession', sinon.stub().returns('testSId'));
     sinon.replace(session, 'isValidSId', isValidSIdStub);
     sinon.replace(session, 'getSessionAttribute', getSessionAttributeStub);
   });
-  this.afterEach(function(){
+
+  after(function(){
     sinon.restore();
   });
+
   describe('GET', function() {
     it('/<staticFilePath> should serve the static file', function(done) {
       request(app.serve.bind(app))
@@ -58,12 +78,10 @@ describe('handlers', function(){
     });
 
     it('/todoList should serve saved todo list as JSON', function(done) {
-      const stubbedReader = sinon.stub().returns(JSON.stringify(testData));
-      sinon.replace(fs, 'readFileSync', stubbedReader);
       request(app.serve.bind(app))
         .get('/todoList')
         .set('cookie', '_SID=testId')
-        .expect(JSON.stringify(testData.testUserName))
+        .expect(JSON.stringify(testTodoData.testUserName))
         .expect('content-type', 'application/json')
         .expect('content-length', '81')
         .expect('date', /./)
@@ -82,11 +100,6 @@ describe('handlers', function(){
   });
 
   describe('POST', function() {
-    this.beforeEach(function(){
-      const stubbedReader = sinon.stub().returns(JSON.stringify(testData));
-      sinon.replace(fs, 'readFileSync', stubbedReader);
-      sinon.replace(fs, 'writeFileSync', () => {});
-    });
 
     describe('addTodo', function() {
       it('should add the specified todo when required fields are given', function(done) {
@@ -368,6 +381,47 @@ describe('handlers', function(){
           .expect('content-length', '44')
           .expect('date', /./)
           .expect(404, done);
+      });
+    });
+
+    describe('signup', function() {
+      it('should register new user and redirect to login page', function(done) {
+        request(app.serve.bind(app))
+          .post('/signUp')
+          .send('userName=userName2&password=password')
+          .expect('date', /./)
+          .expect('location', 'login.html')
+          .expect(302, done);
+      });
+    });
+
+    describe('login', function() {
+      it('should redirect to index.html if valid credentials are given', function(done) {
+        request(app.serve.bind(app))
+          .post('/login')
+          .send('userName=userName&password=password')
+          .expect('Set-Cookie', '_SID=testSId')
+          .expect('date', /./)
+          .expect('location', 'index.html')
+          .expect(302, done);
+      });
+
+      it('should redirect to login.html if invalid password is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/login')
+          .send('userName=userName&password=invalid')
+          .expect('date', /./)
+          .expect('location', 'login.html')
+          .expect(302, done);
+      });
+
+      it('should redirect to login.html if invalid username is given', function(done) {
+        request(app.serve.bind(app))
+          .post('/login')
+          .send('userName=invalid&password=password')
+          .expect('date', /./)
+          .expect('location', 'login.html')
+          .expect(302, done);
       });
     });
 

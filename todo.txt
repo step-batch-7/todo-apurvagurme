@@ -139,7 +139,9 @@ Install eslint --done--
 
 * Design a primitive login feature --done--
 
-* add test for not login case for index.html
+* add test for not login case for index.html --done--
+
+* move to express primarily
 
 * Ask for confirmation before deleting 
   

@@ -437,16 +437,6 @@ describe('handlers', function(){
           .expect(404, done);
       });
 
-      it('should response "bad request" when any JSON data sent without mentioning in header', function(done) {
-        request(app)
-          .post('/addTodo')
-          .send('{}')
-          .expect('')
-          .expect('content-length', '0')
-          .expect('date', /./)
-          .expect(400, done);
-      });
-
       it('should response with json error when content-type is specified as json but given data is not a JSON string', function(done) {
         request(app)
           .post('/addTodo')
@@ -457,6 +447,14 @@ describe('handlers', function(){
           .expect('Content-Type', 'text/html; charset=utf-8')
           .expect('date', /./)
           .expect(400, done);
+      });
+
+      it('should response "unauthorized" for unauthorized resource access', function(done) {
+        request(app)
+          .get('/todoList')
+          .expect('')
+          .expect('date', /./)
+          .expect(401, done);
       });
     });
   });

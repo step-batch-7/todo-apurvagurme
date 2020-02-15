@@ -151,6 +151,8 @@ Install eslint --done--
 
 * Separated populating app and starting server in separate modules --done--
 
+* moved saveUsersData, saveAllTodoLists, allTodoLists, usersData from server to datastore file --done--
+
 * Ask for confirmation before deleting 
   
 * Change the text to faded text when checkbox is checked 

@@ -17,7 +17,7 @@ describe('handlers', function(){
   });
   
   this.beforeEach(function(){
-    app.locals.allTodoData = {testUserName: TodoList.load([
+    app.locals.allTodoLists = {testUserName: TodoList.load([
       {
         'title': 'fruits',
         'id': '0',
@@ -25,8 +25,8 @@ describe('handlers', function(){
       }
     ])};
     app.locals.usersData = {userName: {password: 'password'}};
-    app.locals.saveAllTodoData = () => {};
-    app.locals.saveUsersInfo = () => {};
+    app.locals.saveAllTodoLists = () => {};
+    app.locals.saveUsersData = () => {};
   });
 
   after(function(){

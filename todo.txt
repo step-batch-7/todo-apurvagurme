@@ -153,6 +153,8 @@ Install eslint --done--
 
 * moved saveUsersData, saveAllTodoLists, allTodoLists, usersData from server to datastore file --done--
 
+* Add new todoList while signUp. --done--
+
 * Ask for confirmation before deleting 
   
 * Change the text to faded text when checkbox is checked 

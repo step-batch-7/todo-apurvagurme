@@ -44,29 +44,30 @@ describe('handlers', function(){
         .expect(200, done);
     });
 
-    it('/ should serve index.html', function(done) {
+    it('/ should redirect to index.html', function(done) {
       request(app)
         .get('/')
         .set('cookie', '_SID=testId')
-        .expect(/TODO LIST/)
-        .expect('content-type', 'text/html; charset=UTF-8')
-        .expect('content-length', '928')
+        .expect('Found. Redirecting to /index.html')
+        .expect('location', '/index.html')
+        .expect('content-type', 'text/plain; charset=utf-8')
+        .expect('content-length', '33')
         .expect('date', /./)
-        .expect(200, done);
+        .expect(302, done);
     });
 
-    it('/ should redirect to login page', function(done) {
+    it('/index.html should redirect to login page when not logged in', function(done) {
       request(app)
-        .get('/')
+        .get('/index.html')
         .expect('Found. Redirecting to login.html')
         .expect('location', 'login.html')
         .expect('date', /./)
         .expect(302, done);
     });
 
-    it('/todoList should serve saved todo list as JSON', function(done) {
+    it('/user/todoList should serve saved todo list as JSON', function(done) {
       request(app)
-        .get('/todoList')
+        .get('/user/todoList')
         .set('cookie', '_SID=testId')
         .expect('[{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":true}]}]')
         .expect('content-type', 'application/json; charset=utf-8')
@@ -91,7 +92,7 @@ describe('handlers', function(){
     describe('addTodo', function() {
       it('should add the specified todo when required fields are given', function(done) {
         request(app)
-          .post('/addTodo')
+          .post('/user/addTodo')
           .set('cookie', '_SID=testId')
           .send({todoTitle: 'newTodo'})
           .expect('[{"title":"newTodo","id":"1","tasks":[]},{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":true}]}]')
@@ -103,7 +104,7 @@ describe('handlers', function(){
 
       it('should response "bad request" when required fields are not given', function(done) {
         request(app)
-          .post('/addTodo')
+          .post('/user/addTodo')
           .set('cookie', '_SID=testId')
           .send({})
           .expect('')
@@ -116,7 +117,7 @@ describe('handlers', function(){
     describe('renameTodo', function() {
       it('should rename the todo title of the given id when required fields are given', function(done) {
         request(app)
-          .post('/renameTodo')
+          .post('/user/renameTodo')
           .set('cookie', '_SID=testId')
           .send({todoTitle: 'newName', todoId: '0'})
           .expect('[{"title":"newName","id":"0","tasks":[{"name":"apple","id":"0_0","status":true}]}]')
@@ -128,7 +129,7 @@ describe('handlers', function(){
 
       it('should response "bad request" when required fields are not given', function(done) {
         request(app)
-          .post('/renameTodo')
+          .post('/user/renameTodo')
           .set('cookie', '_SID=testId')
           .send({})
           .expect('')
@@ -139,12 +140,12 @@ describe('handlers', function(){
 
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app)
-          .post('/renameTodo')
+          .post('/user/renameTodo')
           .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId', todoTitle: 'name'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '150')
+          .expect('content-length', '155')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -153,7 +154,7 @@ describe('handlers', function(){
     describe('deleteTodo', function() {
       it('should delete the todo of the given id when required fields are given', function(done) {
         request(app)
-          .post('/deleteTodo')
+          .post('/user/deleteTodo')
           .set('cookie', '_SID=testId')
           .send({ todoId: '0'})
           .expect('[]')
@@ -165,7 +166,7 @@ describe('handlers', function(){
 
       it('should response "bad request" when required fields are not given', function(done) {
         request(app)
-          .post('/deleteTodo')
+          .post('/user/deleteTodo')
           .set('cookie', '_SID=testId')
           .send({})
           .expect('')
@@ -176,12 +177,12 @@ describe('handlers', function(){
 
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app)
-          .post('/deleteTodo')
+          .post('/user/deleteTodo')
           .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '150')
+          .expect('content-length', '155')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -190,7 +191,7 @@ describe('handlers', function(){
     describe('addTask', function() {
       it('should add task to the specified todo when required fields are given', function(done) {
         request(app)
-          .post('/addTask')
+          .post('/user/addTask')
           .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":true},{"name":"newTask","id":"0_1","status":false}]}]')
@@ -202,7 +203,7 @@ describe('handlers', function(){
 
       it('should response "bad request" when required fields are not given', function(done) {
         request(app)
-          .post('/addTask')
+          .post('/user/addTask')
           .set('cookie', '_SID=testId')
           .send({})
           .expect('')
@@ -213,12 +214,12 @@ describe('handlers', function(){
 
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app)
-          .post('/addTask')
+          .post('/user/addTask')
           .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: 'invalidId'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '147')
+          .expect('content-length', '152')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -227,7 +228,7 @@ describe('handlers', function(){
     describe('renameTask', function() {
       it('should add task to the specified todo when required fields are given', function(done) {
         request(app)
-          .post('/renameTask')
+          .post('/user/renameTask')
           .set('cookie', '_SID=testId')
           .send({newName: 'mango', taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"mango","id":"0_0","status":true}]}]')
@@ -239,7 +240,7 @@ describe('handlers', function(){
 
       it('should response "bad request" when required fields are not given', function(done) {
         request(app)
-          .post('/renameTask')
+          .post('/user/renameTask')
           .set('cookie', '_SID=testId')
           .send({})
           .expect('')
@@ -250,24 +251,24 @@ describe('handlers', function(){
 
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app)
-          .post('/renameTask')
+          .post('/user/renameTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId', newName: 'name'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '150')
+          .expect('content-length', '155')
           .expect('date', /./)
           .expect(404, done);
       });
 
       it('should response "not found" when invalid taskId is given', function(done) {
         request(app)
-          .post('/renameTask')
+          .post('/user/renameTask')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0', newName: 'name'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '150')
+          .expect('content-length', '155')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -276,7 +277,7 @@ describe('handlers', function(){
     describe('toggleTaskStatus', function() {
       it('should add task to the specified todo when required fields are given', function(done) {
         request(app)
-          .post('/toggleTaskStatus')
+          .post('/user/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":false}]}]')
@@ -288,7 +289,7 @@ describe('handlers', function(){
 
       it('should response "bad request" when required fields are not given', function(done) {
         request(app)
-          .post('/toggleTaskStatus')
+          .post('/user/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({})
           .expect('')
@@ -299,24 +300,24 @@ describe('handlers', function(){
 
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app)
-          .post('/toggleTaskStatus')
+          .post('/user/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '156')
+          .expect('content-length', '161')
           .expect('date', /./)
           .expect(404, done);
       });
 
       it('should response "not found" when invalid taskId is given', function(done) {
         request(app)
-          .post('/toggleTaskStatus')
+          .post('/user/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '156')
+          .expect('content-length', '161')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -325,7 +326,7 @@ describe('handlers', function(){
     describe('deleteTask', function() {
       it('should delete specified task of the specified todo when required fields are given', function(done) {
         request(app)
-          .post('/deleteTask')
+          .post('/user/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: '0'})
           .expect('[{"title":"fruits","id":"0","tasks":[]}]')
@@ -337,7 +338,7 @@ describe('handlers', function(){
 
       it('should response "bad request" when required fields are not given', function(done) {
         request(app)
-          .post('/deleteTask')
+          .post('/user/deleteTask')
           .set('cookie', '_SID=testId')
           .send({})
           .expect('')
@@ -348,24 +349,24 @@ describe('handlers', function(){
 
       it('should response "not found" when invalid todoId is given', function(done) {
         request(app)
-          .post('/deleteTask')
+          .post('/user/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '150')
+          .expect('content-length', '155')
           .expect('date', /./)
           .expect(404, done);
       });
 
       it('should response "not found" when invalid taskId is given', function(done) {
         request(app)
-          .post('/deleteTask')
+          .post('/user/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
           .expect(/Cannot POST/)
           .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '150')
+          .expect('content-length', '155')
           .expect('date', /./)
           .expect(404, done);
       });
@@ -425,7 +426,7 @@ describe('handlers', function(){
 
       it('should response with json error when content-type is specified as json but given data is not a JSON string', function(done) {
         request(app)
-          .post('/addTodo')
+          .post('/user/addTodo')
           .set('Content-Type', 'application/json; charset=utf-8')
           .send('abc')
           .expect(/Error/)
@@ -437,7 +438,7 @@ describe('handlers', function(){
 
       it('should response "unauthorized" for unauthorized resource access', function(done) {
         request(app)
-          .get('/todoList')
+          .get('/user/todoList')
           .expect('')
           .expect('date', /./)
           .expect(401, done);

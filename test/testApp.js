@@ -6,7 +6,7 @@ const session = require('../lib/sessionManager');
 process.env.DATA_STORE_PATH = 'testDataPath';
 process.env.USERS_INFO_PATH = 'testUsersInfo';
 
-const {app, server} = require('../server.js');
+const app = require('../lib/app.js');
 
 const testTodoData = {testUserName: [
   {
@@ -44,7 +44,6 @@ describe('handlers', function(){
 
   after(function(){
     sinon.restore();
-    server.close();
   });
 
   describe('GET', function() {

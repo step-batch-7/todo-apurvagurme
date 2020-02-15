@@ -149,6 +149,8 @@ Install eslint --done--
 
 * use express in-built methods like: res.redirect(), res.json() --done--
 
+* Separated populating app and starting server in separate modules --done--
+
 * Ask for confirmation before deleting 
   
 * Change the text to faded text when checkbox is checked 

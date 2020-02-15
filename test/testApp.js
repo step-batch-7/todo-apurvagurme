@@ -39,7 +39,7 @@ describe('handlers', function(){
         .get('/login.html')
         .expect(/Login/)
         .expect('content-type', 'text/html; charset=UTF-8')
-        .expect('content-length', '459')
+        .expect('content-length', '576')
         .expect('date', /./)
         .expect(200, done);
     });
@@ -384,32 +384,32 @@ describe('handlers', function(){
     });
 
     describe('login', function() {
-      it('should redirect to index.html if valid credentials are given', function(done) {
+      it('should response with success flag true', function(done) {
         request(app)
           .post('/login')
-          .send('userName=userName&password=password')
+          .send({userName: 'userName', password: 'password'})
           .expect('Set-Cookie', '_SID=testSId; Path=/')
           .expect('date', /./)
-          .expect('location', 'index.html')
-          .expect(302, done);
+          .expect('{"isSuccessful":true}')
+          .expect(200, done);
       });
 
       it('should redirect to login.html if invalid password is given', function(done) {
         request(app)
           .post('/login')
-          .send('userName=userName&password=invalid')
+          .send({userName: 'userName', password: 'invalid'})
           .expect('date', /./)
-          .expect('location', 'login.html')
-          .expect(302, done);
+          .expect('{"isSuccessful":false}')
+          .expect(200, done);
       });
 
       it('should redirect to login.html if invalid username is given', function(done) {
         request(app)
           .post('/login')
-          .send('userName=invalid&password=password')
+          .send({userName: 'invalid', password: 'password'})
           .expect('date', /./)
-          .expect('location', 'login.html')
-          .expect(302, done);
+          .expect('{"isSuccessful":false}')
+          .expect(200, done);
       });
     });
 

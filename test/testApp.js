@@ -1,38 +1,12 @@
-const fs = require('fs');
 const request = require('supertest');
 const sinon = require('sinon');
 const session = require('../lib/sessionManager');
-
-process.env.DATA_STORE_PATH = 'testDataPath';
-process.env.USERS_INFO_PATH = 'testUsersInfo';
+const {TodoList} = require('../lib/todoList');
 
 const app = require('../lib/app.js');
 
-const testTodoData = {testUserName: [
-  {
-    'title': 'fruits',
-    'id': '0',
-    'tasks': [{ 'name': 'apple', 'id': '0_0', 'status': true }]
-  }
-]};
-
-const testUserData = {userName: {password: 'password'}};
-
 describe('handlers', function(){
   this.beforeAll(function(){
-    const originalReader = fs.readFileSync;
-    const mockedReader = sinon.stub();
-    mockedReader.withArgs('testDataPath', 'UTF8').returns(JSON.stringify(testTodoData));
-    mockedReader.withArgs('testUsersInfo', 'UTF8').returns(JSON.stringify(testUserData));
-    mockedReader.callsFake(originalReader);
-    sinon.replace(fs, 'readFileSync', mockedReader);
-    const originalExists = fs.existsSync;
-    const mockedExistChecker = sinon.stub();
-    mockedExistChecker.withArgs('testDataPath').returns(true);
-    mockedExistChecker.withArgs('testUsersInfo').returns(true);
-    mockedExistChecker.callsFake(originalExists);
-    sinon.replace(fs, 'existsSync', mockedExistChecker);
-    sinon.replace(fs, 'statSync', sinon.stub().returns({isFile: () => true}));
     const isValidSIdStub = sinon.stub();
     isValidSIdStub.withArgs('testId').returns(true);
     const getSessionAttributeStub = sinon.stub();
@@ -40,6 +14,19 @@ describe('handlers', function(){
     sinon.replace(session, 'addSession', sinon.stub().returns('testSId'));
     sinon.replace(session, 'isValidSId', isValidSIdStub);
     sinon.replace(session, 'getSessionAttribute', getSessionAttributeStub);
+  });
+  
+  this.beforeEach(function(){
+    app.locals.allTodoData = {testUserName: TodoList.load([
+      {
+        'title': 'fruits',
+        'id': '0',
+        'tasks': [{ 'name': 'apple', 'id': '0_0', 'status': true }]
+      }
+    ])};
+    app.locals.usersData = {userName: {password: 'password'}};
+    app.locals.saveAllTodoData = () => {};
+    app.locals.saveUsersInfo = () => {};
   });
 
   after(function(){
@@ -81,7 +68,7 @@ describe('handlers', function(){
       request(app)
         .get('/todoList')
         .set('cookie', '_SID=testId')
-        .expect(JSON.stringify(testTodoData.testUserName))
+        .expect('[{"title":"fruits","id":"0","tasks":[{"name":"apple","id":"0_0","status":true}]}]')
         .expect('content-type', 'application/json; charset=utf-8')
         .expect('content-length', '81')
         .expect('date', /./)

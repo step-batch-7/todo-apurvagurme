@@ -413,6 +413,16 @@ describe('handlers', function(){
       });
     });
 
+    describe('logout', function() {
+      it('should response with status ok', function(done) {
+        request(app)
+          .post('/logout')
+          .expect('date', /./)
+          .expect('')
+          .expect(200, done);
+      });
+    });
+
     describe('General', function(){
       it('/<invalidAction> should give 404 and not found message', function(done) {
         request(app)

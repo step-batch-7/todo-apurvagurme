@@ -43,3 +43,10 @@ const deleteTask = function(taskId) {
   const [todoId] = taskId.split('_');
   sendDataToServer('/user/deleteTask', {taskId, todoId}, renderTodoList);
 };
+
+const logout = function(){
+  document.cookie = '_SID=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+  sendDataToServer('/logout', undefined, () => {
+    location.assign('login.html');
+  });
+};

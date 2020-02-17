@@ -11,8 +11,8 @@
   </head>
   <body onload="loadAllTodoLists()">
     <h1>TODO LIST</h1>
-    <div id="topBar">
-      <button onclick="logout()">Logout</button>
+    <div class="topBar">
+      <button class="logoutBtn" onclick="logout()">Logout</button>
       <input
         id="newTodoTitle"
         type="text"
@@ -22,11 +22,14 @@
       <input
         id="searchBar"
         type="text"
-        placeholder="🔍 Search todo.."
+        placeholder="🔍 Search"
         oninput="searchTodo(event)"
       />
       <input type="checkbox" oninput="toggleSearchAction(this)" id="searchFilter">
-      <label for="searchFilter">Task</label>
+      <label for="searchFilter"><div>
+        <span class="todoFilter">TODO</span>
+        <span class="taskFilter">TASK</span>
+      </div></label>
     </div>
     <br />
     <div id="todoListContainer">

@@ -20,11 +20,12 @@ const generateTodoHtml = function(todo) {
   todoHtml.innerHTML = `
       <div class="todoTitle">
         <h3 class="titleInputBox" contenteditable=true onkeydown="blurOnEnter(this)" 
-          onblur="renameTodo(this,'${todo.id}')">${todo.title}</h3>
+          onblur="renameTodo(this,'${todo.id}')"></h3>
         <img class="removeTodo" onclick="deleteTodo('${todo.id}')" src="./images/dustbin.svg">
       </div>
       <div class='tasksContainer'></div>
       <input class='subtaskInput' type='text' onkeydown="addTask('${todo.id}')" placeholder="New Task">`;
+  todoHtml.children[0].children[0].innerText = todo.title;
   tasks.forEach(task => todoHtml.children[1].append(task));
   return todoHtml;
 };

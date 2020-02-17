@@ -3,15 +3,91 @@ body {
   font-weight: 100;
 }
 
-#topBar input::placeholder {
-  font-size: 16px;
+.topBar {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-left: 70px;
+  margin-right: 70px;
 }
 
-#searchBar, #newTodoTitle {
+.topBar input::placeholder {
+  font-size: 16px;
+  color: rgb(9, 128, 151)
+}
+
+.topBar input {
   height: 18px;
-  border-width: 0 0 2px;
+  border: none;
+  border-bottom: 1px solid rgb(9, 128, 151);
   outline: none;
-  margin-right: 20px;
+  margin: 0 15px;
+  font-size: 20px;
+  padding: 6px;
+  opacity: 0.7;
+}
+
+.topBar input:hover,
+.topBar input:focus { 
+  opacity: 1;
+}
+
+.logoutBtn {
+  background-color: rgb(9, 128, 151);
+  color: white ;
+  font-size: 16px;
+  font-weight: 100;
+  border: none;
+  line-height: 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.logoutBtn:hover{
+  opacity: 1;
+}
+
+#searchFilter{
+  display: none;
+}
+
+#searchFilter ~ label > div {
+  height: 32px;
+  width: 60px;
+  border-radius: 30px;
+  border: 2px solid rgb(9, 128, 151);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#searchFilter ~ label > div > span {
+  background-color: rgb(9, 128, 151);
+  color: white;
+  font-size: 8px;
+  padding: 0 2px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 1px;
+  height: 28px;
+  border-radius: 30px;
+  width: 24px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+#searchFilter ~ label > div > .taskFilter{
+  visibility: collapse;
+}
+
+#searchFilter:checked ~ label > div > .taskFilter {
+  visibility: visible;
+}
+
+#searchFilter:checked ~ label > div > .todoFilter {
+  visibility: collapse;
 }
 
 #todoListContainer {
@@ -119,15 +195,18 @@ input[type="checkbox"]:checked ~ p {
   margin: 3px 8px;
   line-height: 22px;
   flex-grow: 1;
+  flex-shrink: 1;
   outline: none;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .taskDiv > img {
   width: 12px;
-  display: none;
+  visibility: hidden;
   width: 15px;
   cursor: pointer;
-  transition: all 250ms;
+  transition: transform 250ms;
 }
 
 .taskDiv > img:hover {
@@ -135,7 +214,7 @@ input[type="checkbox"]:checked ~ p {
 }
 
 .taskDiv:hover > img {
-  display: inline;
+  visibility: visible;
 }
 
 .todo > input {
@@ -157,36 +236,6 @@ h1 {
   color: rgb(138, 138, 138);
   display: block;
   font-weight: bold;
-}
-
-/* img {
-  cursor: pointer;
-  width: 50px;
-  margin-top: -10px;
-  opacity: 0.7;
-} */
-
-#topBar {
-  display: flex;
-  /* justify-content: space-between; */
-  flex-direction: row-reverse;
-  align-items: center;
-  margin-left: 70px;
-  margin-right: 70px;
-}
-
-/* .taskName {
-  outline: none;
-  height: 20px;
-  width: 154px;
-  border: none;
-  border-color: transparent;
-  font-weight: 1000px;
-} */
-
-#topBar input[type='text'] {
-  font-size: 20px;
-  padding: 10px;
 }
 
 .hidden {

@@ -1,8 +1,8 @@
-const getAllTodo = () => Array.from(document.querySelectorAll('.task'));
-const getTodoTitle = todo => todo.querySelector('.titleInputBox').value;
+const getAllTodo = () => Array.from(document.querySelectorAll('.todo'));
+const getTodoTitle = todo => todo.querySelector('.titleInputBox').innerText;
 
-const getAllTasks = () => Array.from(document.querySelectorAll('.cbDiv'));
-const getTaskName = task => task.querySelector('.taskName').value;
+const getAllTasks = () => Array.from(document.querySelectorAll('.taskDiv'));
+const getTaskName = task => task.querySelector('p').innerText;
 
 const isMatchedTodo = function(searchKeyword, todo){
   return getTodoTitle(todo).includes(searchKeyword);

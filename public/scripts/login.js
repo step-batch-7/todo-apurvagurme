@@ -8,7 +8,7 @@ const attemptLogin = function(){
   const password = passwordField.value;
   if(userName && password) {
     sendDataToServer('/login', {userName, password}, (confirmation) => {
-      if(JSON.parse(confirmation).isSuccessful){
+      if(confirmation.isSuccessful){
         return location.assign('index.html');
       }
       showWarning();

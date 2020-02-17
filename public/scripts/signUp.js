@@ -1,7 +1,7 @@
 const checkForUniqUserName = function(){
   signUpForm.onsubmit = () => false;
   sendDataToServer('/userNameAvailability', {entered: userNameField.value}, confirmation => {
-    if(JSON.parse(confirmation).isUniq){
+    if(confirmation.isUniq){
       signUpForm.onsubmit = () => true;
       return;
     }

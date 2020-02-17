@@ -6,9 +6,10 @@ const sendReq = function({method, url, headers}, content, callback){
       return;
     }
     if (this.status === 200) {
-      callback && callback(this.responseText);
+      callback && callback(this.response);
     }
   };
+  xhr.responseType = 'json';
   xhr.open(method, url);
   Object.entries(headers).forEach(([key, value]) => xhr.setRequestHeader(key, value));
   xhr.send(content);

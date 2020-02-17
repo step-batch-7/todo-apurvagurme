@@ -30,8 +30,7 @@ const generateTodoHtml = function(todo) {
   return todoHtml;
 };
 
-const renderTodoList = function(todoList) {
-  const list = JSON.parse(todoList);
+const renderTodoList = function(list) {
   const todoHtmls = list.map(generateTodoHtml);
   const container = document.getElementById('todoListContainer');
   container.innerHTML = '';

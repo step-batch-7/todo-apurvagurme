@@ -14,6 +14,7 @@ describe('handlers', function(){
     sinon.replace(session, 'addSession', sinon.stub().returns('testSId'));
     sinon.replace(session, 'isValidSId', isValidSIdStub);
     sinon.replace(session, 'getSessionAttribute', getSessionAttributeStub);
+    sinon.replace(session, 'clearSession', () => {});
   });
   
   this.beforeEach(function(){
@@ -138,16 +139,16 @@ describe('handlers', function(){
           .expect(400, done);
       });
 
-      it('should response "not found" when invalid todoId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid todoId is given', function(done) {
         request(app)
           .post('/user/renameTodo')
           .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId', todoTitle: 'name'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '155')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
     });
 
@@ -175,16 +176,16 @@ describe('handlers', function(){
           .expect(400, done);
       });
 
-      it('should response "not found" when invalid todoId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid todoId is given', function(done) {
         request(app)
           .post('/user/deleteTodo')
           .set('cookie', '_SID=testId')
           .send({todoId: 'invalidId'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '155')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
     });
 
@@ -212,16 +213,16 @@ describe('handlers', function(){
           .expect(400, done);
       });
 
-      it('should response "not found" when invalid todoId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid todoId is given', function(done) {
         request(app)
           .post('/user/addTask')
           .set('cookie', '_SID=testId')
           .send({taskName: 'newTask', todoId: 'invalidId'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '152')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
     });
 
@@ -249,28 +250,28 @@ describe('handlers', function(){
           .expect(400, done);
       });
 
-      it('should response "not found" when invalid todoId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid todoId is given', function(done) {
         request(app)
           .post('/user/renameTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId', newName: 'name'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '155')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
 
-      it('should response "not found" when invalid taskId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid taskId is given', function(done) {
         request(app)
           .post('/user/renameTask')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0', newName: 'name'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '155')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
     });
 
@@ -298,28 +299,28 @@ describe('handlers', function(){
           .expect(400, done);
       });
 
-      it('should response "not found" when invalid todoId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid todoId is given', function(done) {
         request(app)
           .post('/user/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '161')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
 
-      it('should response "not found" when invalid taskId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid taskId is given', function(done) {
         request(app)
           .post('/user/toggleTaskStatus')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '161')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
     });
 
@@ -347,28 +348,28 @@ describe('handlers', function(){
           .expect(400, done);
       });
 
-      it('should response "not found" when invalid todoId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid todoId is given', function(done) {
         request(app)
           .post('/user/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: '0_0', todoId: 'invalidId'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '155')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
 
-      it('should response "not found" when invalid taskId is given', function(done) {
+      it('should response "Not Acceptable(406)" when invalid taskId is given', function(done) {
         request(app)
           .post('/user/deleteTask')
           .set('cookie', '_SID=testId')
           .send({taskId: 'invalidId', todoId: '0'})
-          .expect(/Cannot POST/)
-          .expect('content-type', 'text/html; charset=utf-8')
-          .expect('content-length', '155')
+          .expect('Not Acceptable')
+          .expect('content-type', 'text/plain; charset=utf-8')
+          .expect('content-length', '14')
           .expect('date', /./)
-          .expect(404, done);
+          .expect(406, done);
       });
     });
 
@@ -417,6 +418,7 @@ describe('handlers', function(){
       it('should response with status ok', function(done) {
         request(app)
           .post('/logout')
+          .set('cookie', '_SID=testId')
           .expect('date', /./)
           .expect('')
           .expect(200, done);
@@ -432,18 +434,6 @@ describe('handlers', function(){
           .expect('content-length', '153')
           .expect('date', /./)
           .expect(404, done);
-      });
-
-      it('should response with json error when content-type is specified as json but given data is not a JSON string', function(done) {
-        request(app)
-          .post('/user/addTodo')
-          .set('Content-Type', 'application/json; charset=utf-8')
-          .send('abc')
-          .expect(/Error/)
-          .expect('content-length', '1263')
-          .expect('Content-Type', 'text/html; charset=utf-8')
-          .expect('date', /./)
-          .expect(400, done);
       });
 
       it('should response "unauthorized" for unauthorized resource access', function(done) {

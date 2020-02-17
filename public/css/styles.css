@@ -5,15 +5,22 @@ body {
 
 .topBar {
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
-  margin-left: 70px;
-  margin-right: 70px;
+  margin: 40px 70px 10px;
+}
+
+.topBar * {
+  flex-shrink: 0;
+}
+
+.topBar > div{
+  flex-grow: 1;
 }
 
 .topBar input::placeholder {
   font-size: 16px;
-  color: rgb(9, 128, 151)
+  color: rgb(9, 128, 151);
+  font-style: italic;
 }
 
 .topBar input {
@@ -22,14 +29,23 @@ body {
   border-bottom: 1px solid rgb(9, 128, 151);
   outline: none;
   margin: 0 15px;
-  font-size: 20px;
   padding: 6px;
   opacity: 0.7;
+  font-size: 16px;
+  color: rgb(9, 128, 151)
 }
 
 .topBar input:hover,
 .topBar input:focus { 
   opacity: 1;
+}
+
+.topBar h1 {
+  color: rgb(138, 138, 138);
+  display: block;
+  margin: 0 15px;
+  font-weight: 100;
+  color: rgb(9, 128, 151)
 }
 
 .logoutBtn {
@@ -42,9 +58,12 @@ body {
   border-radius: 4px;
   cursor: pointer;
   opacity: 0.8;
+  margin: 0 15px;
+  outline: none;
 }
 
-.logoutBtn:hover{
+.logoutBtn:hover,
+.logoutBtn:focus{
   opacity: 1;
 }
 
@@ -228,14 +247,6 @@ input[type="checkbox"]:checked ~ p {
 
 .todo > input::placeholder{
   color: rgb(9, 128, 151);
-}
-
-
-h1 {
-  text-align: center;
-  color: rgb(138, 138, 138);
-  display: block;
-  font-weight: bold;
 }
 
 .hidden {

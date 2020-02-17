@@ -36,6 +36,11 @@ const clearAllSearch = function(){
 
 const toggleSearchAction = function(checkbox) {
   clearAllSearch();
-  checkbox.checked && (searchBar.oninput = searchTask);
-  !checkbox.checked && (searchBar.oninput = searchTodo);
+  if(checkbox.checked){
+    searchBar.oninput = searchTask;
+    searchBar.placeholder = '🔍 Search Task';
+  }else{
+    searchBar.oninput = searchTodo;
+    searchBar.placeholder = '🔍 Search Todo';
+  }
 };

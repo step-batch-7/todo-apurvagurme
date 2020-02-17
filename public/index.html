@@ -10,26 +10,27 @@
     <title>TODO APP</title>
   </head>
   <body onload="loadAllTodoLists()">
-    <h1>TODO LIST</h1>
     <div class="topBar">
-      <button class="logoutBtn" onclick="logout()">Logout</button>
+      <h1>TODO LIST</h1>
+      <div></div>
       <input
-        id="newTodoTitle"
-        type="text"
-        onkeydown="addTodo(event)"
-        placeholder="➕Add todo"
+      id="newTodoTitle"
+      type="text"
+      onkeydown="addTodo(event)"
+      placeholder="➕Add todo"
       />
       <input
-        id="searchBar"
-        type="text"
-        placeholder="🔍 Search"
-        oninput="searchTodo(event)"
+      id="searchBar"
+      type="text"
+      placeholder="🔍 Search Todo"
+      oninput="searchTodo(event)"
       />
       <input type="checkbox" oninput="toggleSearchAction(this)" id="searchFilter">
       <label for="searchFilter"><div>
         <span class="todoFilter">TODO</span>
         <span class="taskFilter">TASK</span>
       </div></label>
+      <button class="logoutBtn" onclick="logout()">Logout</button>
     </div>
     <br />
     <div id="todoListContainer">

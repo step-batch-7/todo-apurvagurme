@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/loginAndSignUp.css">
   <script src="scripts/requests.js"></script>
   <script src="scripts/login.js"></script>
   <title>Login</title>
 </head>
 <body>
-  <div id="warningBar"></div>
-  <input id="userNameField" name="userName" type="text" placeholder="username"><br>
-  <input id="passwordField" name="password" type="password" placeholder="password"><br>
-  <input id="submitBtn" type="button" value="login"><br>
-  <a href="signUp.html"> Sign up</a>
+  <div class='loginBox'>
+  <h1>Account Login</h1>
+  <div id="warningBar" class="hidden"></div>
+  <input id="userNameField" name="userName" type="text" placeholder="username" autocomplete="off" autofocus>
+  <input id="passwordField" name="password" type="password" placeholder="password">
+  <div class="buttons">
+  <input id="submitBtn" type="button" value="Login">
+  <a tabindex="-1" href="signUp.html">
+    <input type="button" value="Sign up">
+  </a>
+</div>
+</div>
 </body>
 </html>

@@ -3,14 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>signUp</title>
+  <link rel="stylesheet" href="css/loginAndSignUp.css">
+  <title>Sign up</title>
 </head>
 <body>
-  <form action="signUp" method="POST"> 
-    <input name="userName" type="text" placeholder="username"><br>
-    <input name="password" type="password" placeholder="password"><br>
-    <input type="submit" value="signUp"><br>
-  </form>
-  <a href="login.html">Login</a>
+  <form id="signUpForm" action="signUp" method="POST"></form>
+  <div class='loginBox'>
+  <h1>Create Account</h1>
+  <div id="warningBar" class="hidden"></div>
+  <input id="userNameField" name="userName" type="text" placeholder="username" autocomplete="off" autofocus form="signUpForm">
+  <input id="passwordField" name="password" type="password" placeholder="password" form="signUpForm">
+  <div class="buttons">
+  <input id="submitBtn" type="submit" value="Sign up" form="signUpForm">
+  <a tabindex="-1" href="login.html">
+    <input type="button" value="Login">
+  </a>
+</div>
+</div>
 </body>
 </html>

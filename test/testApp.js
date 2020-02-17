@@ -404,12 +404,13 @@ describe('handlers', function(){
     });
 
     describe('signup', function() {
-      it('should register new user and redirect to login page', function(done) {
+      it('should register new user and log in the user and redirect to index.html', function(done) {
         request(app)
           .post('/signUp')
           .send('userName=userName2&password=password')
           .expect('date', /./)
-          .expect('location', 'login.html')
+          .expect('Set-Cookie', '_SID=testSId; Path=/')
+          .expect('location', 'index.html')
           .expect(302, done);
       });
 

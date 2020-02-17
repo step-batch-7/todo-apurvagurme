@@ -1,5 +1,5 @@
 const showWarning = function(){
-  const warning = '<p>Entered Username or Password is incorrect</p>';
+  const warning = '<p>Incorrect Username or Password</p>';
   warningBar.innerHTML = warning;
 };
 

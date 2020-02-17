@@ -384,6 +384,25 @@ describe('handlers', function(){
       });
     });
 
+    describe('userNameAvailability', function() {
+      it('should response with uniq if uniq userName is entered', function(done) {
+        request(app)
+          .post('/userNameAvailability')
+          .send({entered: 'uniq'})
+          .expect('date', /./)
+          .expect(JSON.stringify({isUniq: true}))
+          .expect(200, done);
+      });
+      it('should response with not uniq if uniq userName is entered', function(done) {
+        request(app)
+          .post('/userNameAvailability')
+          .send({entered: 'userName'})
+          .expect('date', /./)
+          .expect(JSON.stringify({isUniq: false}))
+          .expect(200, done);
+      });
+    });
+
     describe('signup', function() {
       it('should register new user and redirect to login page', function(done) {
         request(app)

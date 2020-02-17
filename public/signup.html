@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/loginAndSignUp.css">
+  <script src="scripts/requests.js"></script>
+  <script src="scripts/signUp.js"></script>
   <title>Sign up</title>
 </head>
 <body>
   <form id="signUpForm" action="signUp" method="POST"></form>
   <div class='loginBox'>
   <h1>Create Account</h1>
-  <div id="warningBar" class="hidden"></div>
   <input id="userNameField" name="userName" type="text" placeholder="username" autocomplete="off" autofocus form="signUpForm" required pattern="[A-Za-z0-9]{3,}" title="At least 3 letters or numbers or combination of them">
+  <div id="warningBar" class="hidden"></div>
   <input id="passwordField" name="password" type="password" placeholder="password" form="signUpForm" minlength="4" required>
   <div class="buttons">
   <input id="submitBtn" type="submit" value="Sign up" form="signUpForm">

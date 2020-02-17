@@ -16,7 +16,7 @@ const renameTodo = function(todoId) {
 };
 
 const deleteTodo = function(todoId) {
-  sendDataToServer('/user/deleteTodo', {todoId}, renderTodoList);
+  confirm('Your Todo will be deleted Permanently') && sendDataToServer('/user/deleteTodo', {todoId}, renderTodoList);
 };
 
 const addTask = function(todoId) {

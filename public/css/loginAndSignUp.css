@@ -22,7 +22,8 @@
   font-weight: 100;
 }
 
-#warningBar > p {
+#warningBar > p,
+#warningBar2 > p {
   background: rgba(255, 0, 0, 0.2);
   border-radius: 2px;
   margin: 4px 6px;
@@ -37,7 +38,7 @@
 input[type="text"],input[type="password"]{
   height: 30px;
   margin: 4px 6px;
-  background: rgba(245,245,245);
+  background: rgba(242,242,242);
   border: none;
   font-size: 20px;
   font-weight: 100;
@@ -78,4 +79,10 @@ input {
 
 input:hover, input:focus{
   opacity: 1;
+}
+
+@media (max-width: 700px){
+  .loginBox{
+    width: 80%;
+  }
 }

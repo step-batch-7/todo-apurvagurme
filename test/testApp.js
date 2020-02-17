@@ -40,7 +40,7 @@ describe('handlers', function(){
         .get('/login.html')
         .expect(/Login/)
         .expect('content-type', 'text/html; charset=UTF-8')
-        .expect('content-length', '803')
+        .expect('content-length', '788')
         .expect('date', /./)
         .expect(200, done);
     });

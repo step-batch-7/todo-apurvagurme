@@ -13,8 +13,10 @@
   <div class='loginBox'>
   <h1>Create Account</h1>
   <input id="userNameField" name="userName" type="text" placeholder="username" autocomplete="off" autofocus form="signUpForm" required pattern="[A-Za-z0-9]{3,}" title="At least 3 letters or numbers or combination of them">
-  <div id="warningBar" class="hidden"></div>
+  <div id="warningBar"></div>
   <input id="passwordField" name="password" type="password" placeholder="password" form="signUpForm" minlength="4" required>
+  <div id="warningBar2"></div>
+  <input id="reTypePassword" type="password" placeholder="re-enter password" form="" minlength="4" required>
   <div class="buttons">
   <input id="submitBtn" type="submit" value="Sign up" form="signUpForm">
   <a tabindex="-1" href="login.html">

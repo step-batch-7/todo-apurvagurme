@@ -1,6 +1,6 @@
 const request = require('supertest');
 const sinon = require('sinon');
-const session = require('../lib/sessionManager');
+const session = require('../lib/sessions');
 const {TodoList} = require('../lib/todoList');
 
 const app = require('../lib/app.js');

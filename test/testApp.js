@@ -66,6 +66,17 @@ describe('handlers', function(){
         .expect(302, done);
     });
 
+    it('/index.html should give main page if user logged in', function(done) {
+      request(app)
+        .get('/index.html')
+        .set('cookie', '_SID=testId')
+        .expect(/TODO/)
+        .expect('date', /./)
+        .expect('content-type', 'text/html; charset=UTF-8')
+        .expect('content-length', '977')
+        .expect(200, done);
+    });
+
     it('/user/todoList should serve saved todo list as JSON', function(done) {
       request(app)
         .get('/user/todoList')
@@ -381,6 +392,33 @@ describe('handlers', function(){
           .expect('date', /./)
           .expect('location', 'login.html')
           .expect(302, done);
+      });
+
+      it('should response "Not Acceptable" if given userName is already taken', function(done) {
+        request(app)
+          .post('/signUp')
+          .send('userName=userName&password=password')
+          .expect('date', /./)
+          .expect('Not Acceptable')
+          .expect(406, done);
+      });
+
+      it('should response "Not Acceptable" if given userName is not a valid one', function(done) {
+        request(app)
+          .post('/signUp')
+          .send('userName=as&password=password')
+          .expect('date', /./)
+          .expect('Not Acceptable')
+          .expect(406, done);
+      });
+
+      it('should response "Not Acceptable" if given password length is less than 4', function(done) {
+        request(app)
+          .post('/signUp')
+          .send('userName=asas&password=pas')
+          .expect('date', /./)
+          .expect('Not Acceptable')
+          .expect(406, done);
       });
     });
 

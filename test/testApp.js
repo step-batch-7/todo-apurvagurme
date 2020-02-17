@@ -73,7 +73,7 @@ describe('handlers', function(){
         .expect(/TODO/)
         .expect('date', /./)
         .expect('content-type', 'text/html; charset=UTF-8')
-        .expect('content-length', '977')
+        .expect('content-length', '988')
         .expect(200, done);
     });
 

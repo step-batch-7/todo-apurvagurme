@@ -8,11 +8,9 @@ const addTodo = function() {
   }
 };
 
-const renameTodo = function(todoId) {
-  if (event.key === 'Enter') {
-    const todoTitle = event.target.value;
-    sendDataToServer('/user/renameTodo', {todoTitle, todoId}, renderTodoList);
-  }
+const renameTodo = function(titleElement, todoId) {
+  const todoTitle = titleElement.innerText;
+  sendDataToServer('/user/renameTodo', {todoTitle, todoId}, renderTodoList);
 };
 
 const deleteTodo = function(todoId) {
@@ -26,12 +24,10 @@ const addTask = function(todoId) {
   }
 };
 
-const renameTask = function(taskId) {
-  if (event.key === 'Enter') {
-    const newName = event.target.value;
-    const [todoId] = taskId.split('_');
-    sendDataToServer('/user/renameTask', {newName, taskId, todoId}, renderTodoList);
-  }
+const renameTask = function(taskElement, taskId) {
+  const newName = taskElement.innerText;
+  const [todoId] = taskId.split('_');
+  sendDataToServer('/user/renameTask', {newName, taskId, todoId}, renderTodoList);
 };
 
 const toggleTaskStatus = function(taskId) {
@@ -49,4 +45,8 @@ const logout = function(){
   sendDataToServer('/logout', undefined, () => {
     location.assign('login.html');
   });
+};
+
+const blurOnEnter = function(element){
+  event.key === 'Enter' && element.blur();
 };

@@ -13,7 +13,7 @@ const isMatchedTask = function(searchKeyword, task){
 };
 
 const searchTodo = function() {
-  const searchKeyword = event.target.value;
+  const searchKeyword = searchBar.value;
   const allTodo = getAllTodo();
   allTodo.forEach(todo => todo.classList.add('hidden'));
   const matchedTodoList = allTodo.filter(isMatchedTodo.bind(null, searchKeyword));
@@ -21,14 +21,21 @@ const searchTodo = function() {
 };
 
 const searchTask = function() {
-  const searchKeyword = event.target.value;
+  const searchKeyword = searchBar.value;
   const allTasks = getAllTasks();
   allTasks.forEach(task => task.classList.add('hidden'));
   const matchedTasks = allTasks.filter(isMatchedTask.bind(null, searchKeyword));
   matchedTasks.forEach(task => task.classList.remove('hidden'));
 };
 
+const clearAllSearch = function(){
+  searchBar.value = '';
+  searchTodo();
+  searchTask();
+};
+
 const toggleSearchAction = function(checkbox) {
+  clearAllSearch();
   checkbox.checked && (searchBar.oninput = searchTask);
   !checkbox.checked && (searchBar.oninput = searchTodo);
 };

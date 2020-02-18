@@ -17,6 +17,17 @@ body {
   flex-grow: 1;
 }
 
+.topBar > a {
+  text-decoration: none;
+  color: rgb(9, 128, 151);
+  padding: 0 10px;
+  text-decoration: underline;
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  font-size: 15px;
+}
+
 .topBar input::placeholder {
   font-size: 16px;
   color: rgb(9, 128, 151);

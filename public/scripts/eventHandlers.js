@@ -50,3 +50,14 @@ const logout = function(){
 const blurOnEnter = function(element){
   event.key === 'Enter' && element.blur();
 };
+
+const loadUserName = function(){
+  getDataFromServer('/user/userName', ({userName}) => {
+    userNameBar.innerText = userName;
+  });
+};
+
+const loadData = function(){
+  loadAllTodoLists();
+  loadUserName();
+};

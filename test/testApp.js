@@ -73,7 +73,7 @@ describe('handlers', function(){
         .expect(/TODO/)
         .expect('date', /./)
         .expect('content-type', 'text/html; charset=UTF-8')
-        .expect('content-length', '1115')
+        .expect('content-length', '1136')
         .expect(200, done);
     });
 
@@ -86,6 +86,26 @@ describe('handlers', function(){
         .expect('content-length', '81')
         .expect('date', /./)
         .expect(200, done);
+    });
+
+    it('/user/userName should serve userName when logged in', function(done) {
+      request(app)
+        .get('/user/userName')
+        .set('cookie', '_SID=testId')
+        .expect(JSON.stringify({userName: 'testUserName'}))
+        .expect('content-type', 'application/json; charset=utf-8')
+        .expect('content-length', '27')
+        .expect('date', /./)
+        .expect(200, done);
+    });
+
+    it('/user/userName should serve unauthorized when not logged in', function(done) {
+      request(app)
+        .get('/user/userName')
+        .expect('')
+        .expect('content-length', '0')
+        .expect('date', /./)
+        .expect(401, done);
     });
 
     it('/<invalidPath> should give 404 and not found message', function(done) {

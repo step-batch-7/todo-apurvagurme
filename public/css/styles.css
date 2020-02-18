@@ -136,6 +136,7 @@ body {
 
 input[type="checkbox"]:checked ~ p {
   opacity: 0.4;
+  text-decoration:line-through;
 }
 
 .todo {

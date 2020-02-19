@@ -18,7 +18,6 @@ const clearUserNameWarning = function(){
 const doPasswordsMatch = function(){
   const arePasswordsEqual = reTypePassword.value === passwordField.value;
   !arePasswordsEqual && (warningBar2.innerHTML = '<p> Entered Passwords do not match</p>');
-  console.log(arePasswordsEqual);
   return arePasswordsEqual;
 };
 

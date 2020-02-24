@@ -1,10 +1,10 @@
 const app = require('./lib/app');
-const {saveUsersData, saveAllTodoLists, allTodoLists, usersData} = require('./lib/dataStore');
+const {saveUsersData, saveAllTodoLists, loadSavedRecords, loadUsersInfo} = require('./lib/dataStore');
 
 const main = function(){
   const port = process.env.PORT || 8000;
-  app.locals.allTodoLists = allTodoLists;
-  app.locals.usersData = usersData;
+  loadSavedRecords(app);
+  loadUsersInfo(app);
   app.locals.saveAllTodoLists = saveAllTodoLists;
   app.locals.saveUsersData = saveUsersData;
   app.listen(port, () => {

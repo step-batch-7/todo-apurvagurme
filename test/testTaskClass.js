@@ -6,7 +6,7 @@ describe('Task Class', function(){
     it('should turn a undone task into done task', function() {
       const task = new Task('newTask', '0_0');
       task.toggleStatus();
-      assert.ok(!task.status);
+      assert.ok(task.status);
     });
 
     it('should turn a done task into undone task', function() {
